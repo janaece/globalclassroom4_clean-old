@@ -97,6 +97,8 @@ class courseActions extends sfActions
 			$ind_products_details[$product->getShortName()]["institution_short_name"] = $product->getInstitutionShortName();
 			$ind_products_details[$product->getShortName()]["catalog_short_name"] = $product->getCatalogShortName();
 			$ind_products_details[$product->getShortName()]["platform_short_name"] = $product->getPlatformShortName();
+			$ind_products_details[$product->getShortName()]["network_id"] = $product->getNetworkId();
+			$network_id_val = $product->getNetworkId();
 		}
 
 		//print_r($products_list_institution);
@@ -104,7 +106,8 @@ class courseActions extends sfActions
 		$this->products_list_institution = $products_list_institution;
 		$this->ind_products_details = $ind_products_details;
         $this->getResponse()->setTitle('Courses');
-        sfConfig::set('sf_escaping_strategy', false);		
+        $this->$network_id_val = $network_id_val;
+		sfConfig::set('sf_escaping_strategy', false);		
     }
 	
 	/**
@@ -165,13 +168,15 @@ class courseActions extends sfActions
 			$cert_products_details[$product->getShortName()]["institution_short_name"] = $product->getInstitutionShortName();
 			$cert_products_details[$product->getShortName()]["catalog_short_name"] = $product->getCatalogShortName();
 			$cert_products_details[$product->getShortName()]["platform_short_name"] = $product->getPlatformShortName();
-
+			$cert_products_details[$product->getShortName()]["network_id"] = $product->getNetworkId();
+			$network_id_val = $product->getNetworkId();
 		}
 		//print_r($products_list_institution);
 		$this->cert_products_list = $cert_products_list;
 		$this->products_list_institution = $products_list_institution;
 		$this->cert_products_details = $cert_products_details;
         $this->getResponse()->setTitle('Certifications');
+		$this->$network_id_val = $network_id_val;		
         sfConfig::set('sf_escaping_strategy', false);		
     }	
 	
@@ -224,11 +229,14 @@ class courseActions extends sfActions
 			$products_details[$product->getShortName()]["cost"] = $product->getCost();
 			$products_details[$product->getShortName()]["pricing_html"] = $product->getPricingHtml();
 			$products_details[$product->getShortName()]["icon"] = $product->getIcon();
+			$products_details[$product->getShortName()]["network_id"] = $product->getNetworkId();
+			$network_id_val = $product->getNetworkId();
 		}
 		$this->libraries_list = $products_list;
 		$this->products_list_institution = $products_list_institution;
 		$this->products_details = $products_details;
         $this->getResponse()->setTitle('Subscriptions');
+		$this->$network_id_val = $network_id_val;
         sfConfig::set('sf_escaping_strategy', false);
     }	
 	

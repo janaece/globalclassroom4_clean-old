@@ -541,3 +541,28 @@ ul.sideblock-list
   font-weight: bold;
   padding-left: 13px;
 }
+
+/*** used for Burr to space stuff out****/ 
+.content_spacer_10px 
+{ 
+margin-top: 10px; 
+margin-bottom: 10px; 
+} 
+ 
+.content_spacer_20px 
+{ 
+margin-top: 20px; 
+margin-bottom: 20px; 
+} 
+ 
+.content_spacer_30px 
+{ 
+margin-top: 30px; 
+margin-bottom: 30px; 
+} 
+ 
+.content_spacer_40px 
+{ 
+margin-top: 40px; 
+margin-bottom: 40px; 
+}

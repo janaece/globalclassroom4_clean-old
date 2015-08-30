@@ -216,9 +216,17 @@ foreach($cert_products_list as $product_list_key=>$product_list_val)
 <section id="content">
 <div id="gc_course_list">
 
-<h1>Individual Certifications</h1>
+<div class="content_spacer_20px"><h1>Individual Certifications</h1></div>
 <div>
-<h1>Overview</h1>
+<p>Global Classroom's Certification Programs recognize members for the completion of an educational program 
+that is focused on a subject area. All Certification Programs include a series of interactive learning modules 
+that include <b>video-rich lectures, quizzes & printable guides</b> to help conceptualize key points and apply 
+learned skills. Many Certifications also prepare members for examinations that are required by the certifying or 
+the accrediting organization. 
+Members have unlimited access to the content of the Certification Program for twelve months.</p> 
+</div>
+<div>
+<div class="content_spacer_20px"><h1>Overview</h1></div>
 <div class="row">
 <?php
 $loop_i = 1;
@@ -252,7 +260,7 @@ foreach($cert_products_details as $cert_products_detail_key=>$cert_products_deta
 ?>
 </div>
 <p>&nbsp;</p>
-<h2>Details</h2>
+<div class="content_spacer_20px"><h2>Details</h2></div>
 <div class="panel-group" id="accordion2">
 <?php
 foreach($cert_products_details as $products_detail_key=>$products_detail_val) {
@@ -346,8 +354,16 @@ foreach($cert_products_details as $products_detail_key=>$products_detail_val) {
 							?>
 							<tr>
 								<td width="20%"><?php print $fullname; ?></td>	
-								<td width="15%"><span style="color:green;"><?php print $cost_text; ?>
-								<?php echo $enrollment_status ? "(Paid)" : " "; ?></span></td>
+								<td width="15%"><span style="color:green;">
+								<?php if ($cost == 0) { 
+									echo "Free! ";
+									echo $enrollment_status ? " (Enrolled)" : " "; 
+								} else {
+									print $cost_text; 
+									echo $enrollment_status ? " (Enrolled)" : " "; 						
+								}
+								?>								
+								</span></td>
 								<td><?php print $shortsummary ?></td>
 								<td nowrap style="width: auto;">
 									<div id="gc_course_list">
@@ -362,7 +378,11 @@ foreach($cert_products_details as $products_detail_key=>$products_detail_val) {
 														if ($enrollment_status == 1) { 	
 															echo "Learn&nbsp;More&nbsp;/&nbsp;Go&nbsp;To&nbsp;Course";  
 														} else {
-															echo "Learn&nbsp;More&nbsp;/&nbsp;Purchase"; 
+															if ($cost == 0) {
+																echo "Learn&nbsp;More&nbsp;/&nbsp;Enroll"; 
+															} else {
+																echo "Learn&nbsp;More&nbsp;/&nbsp;Purchase"; 
+															}															 
 														}	
 														?>
 													</a> 
@@ -541,10 +561,10 @@ $gc_course_viewer.addNewCourseListItemsEventListeners();
 	jQuery.getScript("/js/eschool/rightnav.js");
 </script>
 <script type="text/javascript" language="javascript">
-	var hs_portalid=108225;
-	var hs_salog_version = "2.00";
-	var hs_ppa = "globalclassroom.app10.hubspot.com";
-	document.write(unescape("%3Cscript src='" + document.location.protocol + "//" + hs_ppa + "/salog.js.aspx' type='text/javascript'%3E%3C/script%3E"));
+	// var hs_portalid=108225;
+	// var hs_salog_version = "2.00";
+	// var hs_ppa = "globalclassroom.app10.hubspot.com";
+	// document.write(unescape("%3Cscript src='" + document.location.protocol + "//" + hs_ppa + "/salog.js.aspx' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <script>
 	$(document).ready(function () {

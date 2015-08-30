@@ -300,13 +300,11 @@ if ($measure_time == 1) {
 ?>
 
 <div id="gc_course_list">
-	<h1>Subscriptions</h1>
-	<ul>
-	<li>All courses include video-rich tutorials and lectures.</li>
-	<li>Unlimited access to all courses in your purchased library</li>
-	<li>All courses include a Certificate of Completion and become part of your Global Classroom transcript</li>
-	<li>No contract to sign</li>
-	</ul>
+	<div class="content_spacer_20px"><h1>Subscriptions</h1></div>
+	<p>Global Classroom's subscription libraries provide members with unlimited access to courses that are 
+	focused on the job-relevant skills required to succeed in today's global economy. All courses completed 
+	recognize the member with a Certificate or a Badge of Participation that can be shared with your colleagues 
+	and/or employer.</p> 
 	<?php
 		$loop_i = 1;
 		$t1_cost = array();
@@ -321,7 +319,7 @@ if ($measure_time == 1) {
 		
 <!-- blockcheck 1 -->		
 		<div>
-			<h2>My Free & Paid Subscriptions</h2>
+			<div class="content_spacer_20px"><h2>My Membership</h2></div>
 			<div class="row">
 				<?php
 				$loop_i = 1;
@@ -334,7 +332,7 @@ if ($measure_time == 1) {
 							?>
 							<div class="col-md-4">
 								<!-- <a class="various fancybox.iframe" href="http://globalclassroomportal.com/educationlibrary/library_template.php?PassedEducationLibrariesKEY=<?php echo $products_detail_val["id"]; ?>"> -->
-								<a href="#<?php echo $products_detail_val["short_name"] ?>">
+								<a href="#<?php echo $products_detail_val["short_name"]; ?>">
 									<?php
 									$image_url = "";
 									if(!empty($products_detail_val["icon"]) && file_exists("./portal/theme/globalclassroom/static/images/" .$products_detail_val["icon"])) {
@@ -378,7 +376,7 @@ if ($measure_time == 1) {
 				}
 				?>
 				<?php if (($t1_costitem > 0) && ($count_i > 0)) { ?>
-					<h2>$ <?php echo $t1_costitem ?> Subscriptions</h2>
+					<div class="content_spacer_20px"><h2>$<?php echo $t1_costitem ?> Libraries</h2></div>
 					<div class="row">
 						<?php
 						$loop_i = 1;
@@ -390,7 +388,7 @@ if ($measure_time == 1) {
 								if (($products_detail_val["cost"] == $t1_costitem) && ($reg_paid == 0)) { ?>
 									<div class="col-md-4">
 										<!-- <a class="various fancybox.iframe" href="http://globalclassroomportal.com/educationlibrary/library_template.php?PassedEducationLibrariesKEY=<?php echo $products_detail_val["id"]; ?>"> -->
-										<a href="#<?php echo $products_detail_val["short_name"] ?>">
+										<a href="#<?php echo $products_detail_val["short_name"]; ?>">
 											<?php
 											$image_url = "";
 											if(!empty($products_detail_val["icon"]) && file_exists("./portal/theme/globalclassroom/static/images/" .$products_detail_val["icon"])) {
@@ -431,7 +429,7 @@ if ($measure_time == 1) {
 ?>		
 	<p>&nbsp;</p>
 	<div>
-		<h2>Details</h2>
+		<div class="content_spacer_20px"><h2>Details</h2></div>
 	<?php
 	foreach($products_details as $products_detail_key=>$products_detail_val)
 	{
@@ -467,7 +465,7 @@ if ($measure_time == 1) {
 					$button_flag = 0;
 					if(isset($reg_paid_status[$products_detail_key])) {
 						if($reg_paid_status[$products_detail_key]["paid_flag"] == 1) {
-							$button_flag = 0;
+							$button_flag = 2;
 						} else {
 							if($products_detail_val["cost"] > 0) {
 								$button_flag = 1;
@@ -491,13 +489,15 @@ if ($measure_time == 1) {
 							Subscribe
 							</strong>
 							</a>
-						<?php } ?>
-						<?php if($button_flag == 2) { ?>
-							 <!-- <a class="btn btn-info" href="javascript:;">
-							<strong>
-							 Register 
-							</strong>
-							</a> -->
+						<?php } ?>						
+						<?php if ($button_flag == 2) { ?>
+						<?php
+								$image_url = "";
+								if(file_exists("./portal/theme/globalclassroom/static/images/checkmark.png")) {
+										$image_url = $CFG->current_app->getAppUrl() . "theme/globalclassroom/static/images/checkmark.png" ;
+									?>
+									<img src="<?php print $image_url; ?>" height="80" width="80" style="margin-top:-10px;margin-left:5px;">
+								<?php } ?>
 						<?php } ?>						
 					</div>
 					<?php } ?>

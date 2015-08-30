@@ -18,7 +18,7 @@ class GcrUserSymfonyCourseViewHeaderType extends GcrUserSymfonyHeaderType
             $content .= '<ul>';
             $content .= '
             <li><a href="'. $this->institution->getAppUrl() .'" accesskey="h">Dashboard</a></li>
-            <li><a href="'. $this->institution->getAppUrl() .'view" accesskey="v">Pages</a></li>
+            <!-- <li><a href="'. $this->institution->getAppUrl() .'view" accesskey="v">Pages</a></li> -->
             <li><a href="'. $this->institution->getAppUrl() .'group/mygroups.php">Groups</a></li>
 			<li><a href="'. $this->current_app->getUrl() .'/course/subscriptions">Subscriptions</a></li>
 			<li><a href="'. $this->current_app->getUrl() .'/course/view">Courses</a></li>

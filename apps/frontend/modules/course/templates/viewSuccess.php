@@ -161,6 +161,7 @@ $int_all_catalogs_count = 0;
 
 foreach($ind_products_list as $product_list_key=>$product_list_val)
 {
+	$network_id_val = $ind_products_details[$product_list_key]["network_id"];	
 	$institution_name = $products_list_institution[$product_list_key];
 	$mhr_institution_obj = $CFG->current_app->selectFromMhrTable('institution', 'name', $institution_name, true);
 	if ($mhr_institution_obj) {
@@ -221,9 +222,19 @@ print_r($ind_ctlg_crse_count);
 <section id="content">
 <div id="gc_course_list">
 
-<h1>Individual Courses</h1>
+<div class="content_spacer_20px"><h1>Individual Courses</h1></div>
 <div>
-<h1>Overview</h1>
+<?php if ($network_id_val == 5 ) { ?>
+<p>Choose from among courses especially designed and/or chosen for you by your organization.</p>	
+<?php  } else { ?>
+<p>Select courses are available for members to purchase. There's no monthly subscription fee required and 
+members have unlimited access to the course for three months. All courses completed recognize the member 
+with a Certificate or Badge of Participation that can be shared with your colleagues and/or employer</p>
+<?php } ?>
+ 
+</div>
+<div>
+<div class="content_spacer_20px"><h1>Overview</h1></div>
 <div class="row">
 <?php
 $loop_i = 1;
@@ -258,7 +269,7 @@ foreach($ind_products_details as $ind_products_detail_key=>$ind_products_detail_
 </div>
 <p>&nbsp;</p>
 
-<h2>Details</h2>
+<div class="content_spacer_20px"><h2>Details</h2></div>
 <div class="panel-group" id="accordion1">
 <?php
 foreach($ind_products_details as $products_detail_key=>$products_detail_val) {
@@ -352,8 +363,16 @@ foreach($ind_products_details as $products_detail_key=>$products_detail_val) {
 							?>
 							<tr>
 								<td width="20%"><?php print $fullname; ?></td>	
-								<td width="15%"><span style="color:green;"><?php print $cost_text; ?>
-								<?php echo $enrollment_status ? "(Paid)" : " "; ?></span>
+								<td width="15%"><span style="color:green;">
+								<?php if ($cost == 0) { 
+									echo "Free! ";
+									echo $enrollment_status ? " (Enrolled)" : " "; 
+								} else {
+									print $cost_text; 
+									echo $enrollment_status ? " (Enrolled)" : " "; 						
+								}
+								?>
+								</span>
 								</td>
 								<td><?php print $shortsummary ?></td>
 								<td nowrap style="width: auto;">
@@ -369,7 +388,11 @@ foreach($ind_products_details as $products_detail_key=>$products_detail_val) {
 														if ($enrollment_status == 1) { 	
 															echo "Learn&nbsp;More&nbsp;/&nbsp;Go&nbsp;To&nbsp;Course";  
 														} else {
-															echo "Learn&nbsp;More&nbsp;/&nbsp;Purchase"; 
+															if ($cost == 0) {
+																echo "Learn&nbsp;More&nbsp;/&nbsp;Enroll"; 
+															} else {
+																echo "Learn&nbsp;More&nbsp;/&nbsp;Purchase"; 
+															}
 														}	
 														?>
 													</a> 
@@ -549,10 +572,10 @@ $gc_course_viewer.addNewCourseListItemsEventListeners();
 	jQuery.getScript("/js/eschool/rightnav.js");
 </script>
 <script type="text/javascript" language="javascript">
-	var hs_portalid=108225;
-	var hs_salog_version = "2.00";
-	var hs_ppa = "globalclassroom.app10.hubspot.com";
-	document.write(unescape("%3Cscript src='" + document.location.protocol + "//" + hs_ppa + "/salog.js.aspx' type='text/javascript'%3E%3C/script%3E"));
+	// var hs_portalid=108225;
+	// var hs_salog_version = "2.00";
+	// var hs_ppa = "globalclassroom.app10.hubspot.com";
+	// document.write(unescape("%3Cscript src='" + document.location.protocol + "//" + hs_ppa + "/salog.js.aspx' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <script>
 	$(document).ready(function () {
