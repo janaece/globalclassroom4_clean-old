@@ -465,7 +465,7 @@ if ($measure_time == 1) {
 					$button_flag = 0;
 					if(isset($reg_paid_status[$products_detail_key])) {
 						if($reg_paid_status[$products_detail_key]["paid_flag"] == 1) {
-							$button_flag = 2;
+							$button_flag = 0;
 						} else {
 							if($products_detail_val["cost"] > 0) {
 								$button_flag = 1;
@@ -480,7 +480,7 @@ if ($measure_time == 1) {
 							$button_flag = 0;
 						}
 					}
-					if($button_flag > 0) {
+					//if($button_flag > 0) {
 					?>
 					<div class="col-md-3 col-md-offset-3" style="padding-top:20px;">
 						<?php if($button_flag == 1) { ?>
@@ -490,7 +490,7 @@ if ($measure_time == 1) {
 							</strong>
 							</a>
 						<?php } ?>						
-						<?php if ($button_flag == 2) { ?>
+						<?php if ($button_flag == 0) { ?>
 						<?php
 								$image_url = "";
 								if(file_exists("./portal/theme/globalclassroom/static/images/checkmark.png")) {
@@ -500,7 +500,7 @@ if ($measure_time == 1) {
 								<?php } ?>
 						<?php } ?>						
 					</div>
-					<?php } ?>
+					<?php //} ?>
 				</div>
 			</div>
 			<div id="collapseOneCS_<?php echo $products_detail_val["institution_short_name"]."_".$products_detail_val["id"]; ?>" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
