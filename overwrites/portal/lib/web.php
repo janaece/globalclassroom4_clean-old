@@ -502,6 +502,31 @@ EOF;
     if (defined('INSTITUTIONALSTAFF')) {
         $smarty->assign('INSTITUTIONALSTAFF', true);
     }
+	
+	// Below code used for hiding subscription, courses and certifications tabs
+	$current_app_name = explode(".", get_requested_host_name());
+	$current_app_short_name = $current_app_name[0];
+	//echo $current_app_short_name."=".time();
+	$ind_products_count = GcrInstitutionCatalogCoursesTable::getIndividualCoursesCount($current_app_short_name);
+	$sub_products_count = GcrInstitutionCatalogCoursesTable::getSubscriptionCoursesCount($current_app_short_name);
+	$cert_products_count = GcrInstitutionCatalogCoursesTable::getCertificationCoursesCount($current_app_short_name);
+	/* echo "<br>";
+	echo $ind_products_count;
+	echo "<br>";
+	echo $sub_products_count;
+	echo "<br>";
+	echo $cert_products_count;
+	echo "<br>";
+	exit; */
+    if ($sub_products_count > 0) {
+        $smarty->assign('SUBSCRIPTIONS_EXIST', true);
+    }
+    if ($ind_products_count > 0) {
+        $smarty->assign('COURSES_EXIST', true);
+    }
+    if ($cert_products_count > 0) {
+        $smarty->assign('CERTIFICATIONS_EXIST', true);
+    }
 
     $smarty->assign('LOGGEDIN', $USER->is_logged_in());
     $publicsearchallowed = false;

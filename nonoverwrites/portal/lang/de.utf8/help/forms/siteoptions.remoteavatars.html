@@ -1,0 +1,15 @@
+<h3>Anzeige eines Remote Avatars</h3>
+
+<p>Wenn diese Option aktiviert ist, wird der <a href="http://www.gravatar.com">Gravatar</a> Onlineservice benutzt, um Profilbilder der Nutzer/innen anzuzeigen, die in Mahara kein Profilbild aktiviert haben. Dies ermöglicht es den Nutzer/innen für alle Mahara Plattformen einmalig mit dem Gravatar Service ihr Profilbild festzulegen anstelle dies auf jeder Mahara Plattform und Onlinediensten manuell zu tun. (Wenn der Gravatar Dienst für die Nutzer/innen keine Profilbild findet, wird das standardmäßige Mahara Profilbild angezeigt.)</p>
+
+<h4>Gründe diese Option zu deaktivieren</h4>
+
+<p>Diese Option sollte bei Installationen deaktivert werden, bei denen die Nutzer/innen (so wie bei gesperrten Intranetnetzen) <b>keinen Zugriff auf das Internet haben</b>. Wenn Gravatar in solchen Umgebungen benutzt wird, erzeugt dies nur zusätzliche Verzögerungen.</p>
+
+<p>Ebenso könnte für <b>Sites, die https benutzen</b>, die Aktivierung der Gravatar-Profilbilder bei einigen Browsern Sicherheitswarnungen auslösen. Dies passiert, weil die Gravatar Bilder über normale ungesicherte http-Verbindungen bedient werden.</p>
+
+<h4>Nutzerdefinierter Avatar-Server</h4>
+
+<p>Wenn Sie einen benutzerdefinierter Avatar-Server einsetzen, der das Gravatar Protokoll installiert, können Sie die URL in Ihrer config.php Datei angeben:</p>
+
+<p><code>$cfg->remoteavatarbaseurl = 'http://example.com/avatar/';</code></p>

@@ -1,0 +1,34 @@
+.block .header h2{margin:0;}
+
+.block_private_files div.singlebutton{text-align:center;}
+
+div.block{
+    clear: both;font-size: .9167em;padding:0;border:0;
+}
+
+div.block div.content{
+    border: 1px solid #DDD;
+}
+
+div.block div.header{
+    font-size: 1.4em;padding: 4px 5px 2px 5px;margin:0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#DDD));
+    background: -moz-linear-gradient(top, #EEE, #DDD);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-topright: 8px;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEE', endColorstr='#DDD', GradientType=0)";
+    filter: "progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#EEE', EndColorStr='#DDD', GradientType=0)";
+}
+
+.gc_course_list_item_icon { width: 120px; height: 120px; overflow: hidden; margin:0px 25px}
+.gc_course_list_item_icon img {min-height: 120px; min-width: 120px}
+.block_navigation .block_tree .tree_item{margin:0;}
+
+.block_settings .block_tree .tree_item{margin:0;}
+
+.calendartable th,
+.calendartable td {border-width:0;}

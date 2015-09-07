@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/course_profile/db" VERSION="20120626" COMMENT="XMLDB file for Moodle course profile tables">
+  <TABLES>
+    <TABLE NAME="block_course_profile" COMMENT="To store course profile data">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="courseid" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="instructorid"/>
+        <FIELD NAME="instructorid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="courseid" NEXT="courseicon" />
+        <FIELD NAME="courseicon" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="instructorid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="course_profile_pk" TYPE="primary" FIELDS="id" COMMENT="Primary key for course profile"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course_profile_ix" UNIQUE="true" FIELDS="courseid" />
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

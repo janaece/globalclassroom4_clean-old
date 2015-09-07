@@ -1,13 +1,18 @@
 
-
 {if $MAINNAV}
         <div id="main-nav">
             <ul>{strip}
 {foreach from=$MAINNAV item=item}
 	{if $item.url == 'artefact/courses'}
-		<li><span><a href="{$app->getUrl()}/course/subscriptions" accesskey="s" class="">Subscriptions</a></span></li>
-		<li><span><a href="{$app->getUrl()}/course/view" accesskey="s" class="">Courses</a></span></li>
-		<li><span><a href="{$app->getUrl()}/course/certifications" accesskey="s" class="">Certifications</a></span></li>		
+		{if $SUBSCRIPTIONS_EXIST}
+			<li><span><a href="{$app->getUrl()}/course/subscriptions" accesskey="s" class="">Subscriptions</a></span></li>
+		{/if}
+		{if $COURSES_EXIST}
+			<li><span><a href="{$app->getUrl()}/course/view" accesskey="s" class="">Courses</a></span></li>
+		{/if}			
+		{if $CERTIFICATIONS_EXIST}
+			<li><span><a href="{$app->getUrl()}/course/certifications" accesskey="s" class="">Certifications</a></span></li>
+		{/if}		
 	{else}
 		{if $item.url == 'admin/groups/uploadcsv.php'}{$item.url = 'admin/groups/groups.php'}{/if} 
 		<li{if $item.selected} class="selected"{/if}><a href="{$WWWROOT}{$item.url}"{if $item.accesskey} accesskey="{$item.accesskey}"{/if}>{$item.title}</a></li>

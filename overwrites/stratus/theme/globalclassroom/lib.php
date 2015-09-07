@@ -77,26 +77,43 @@ function mahara_navigation()
         $content .= html_writer::end_tag('a');
         $content .= html_writer::end_tag('li');
 		
+ 		// Below code used for hiding subscription, courses and certifications tabs
+		//echo $CFG->current_app->getUrl();
+		$current_app_name = explode(".", $wwwroot);
+		$current_app_short_name = $current_app_name[0];
+		$current_app_short_name = str_replace("http://", "", $current_app_short_name);
+		$current_app_short_name = str_replace("https://", "", $current_app_short_name);
+		$current_app_short_name."=".time();
+		$ind_products_count = GcrInstitutionCatalogCoursesTable::getIndividualCoursesCount($current_app_short_name);
+ 		$sub_products_count = GcrInstitutionCatalogCoursesTable::getSubscriptionCoursesCount($current_app_short_name);
+		$cert_products_count = GcrInstitutionCatalogCoursesTable::getCertificationCoursesCount($current_app_short_name);		
+		
 		//Subscriptions link
-        $content .= html_writer::start_tag('li');
-        $content .= html_writer::nonempty_tag('a', 'Subscriptions',
-                array('href'=> $CFG->current_app->getUrl()."/course/subscriptions"));
-        $content .= html_writer::end_tag('a');
-        $content .= html_writer::end_tag('li');		
-
-        //Courses link
-        $content .= html_writer::start_tag('li');
-        $content .= html_writer::nonempty_tag('a', 'Courses',
-                array('href'=> $CFG->current_app->getUrl()."/course/view"));
-        $content .= html_writer::end_tag('a');
-        $content .= html_writer::end_tag('li');
+		if($sub_products_count > 0) {
+			$content .= html_writer::start_tag('li');
+			$content .= html_writer::nonempty_tag('a', 'Subscriptions',
+					array('href'=> $CFG->current_app->getUrl()."/course/subscriptions"));
+			$content .= html_writer::end_tag('a');
+			$content .= html_writer::end_tag('li');
+		}
+		
+		//Courses link
+		if($ind_products_count > 0) {
+			$content .= html_writer::start_tag('li');
+			$content .= html_writer::nonempty_tag('a', 'Courses',
+					array('href'=> $CFG->current_app->getUrl()."/course/view"));
+			$content .= html_writer::end_tag('a');
+			$content .= html_writer::end_tag('li');
+		}
 		
 		//Certifications link
-        $content .= html_writer::start_tag('li');
-        $content .= html_writer::nonempty_tag('a', 'Certifications',
-                array('href'=> $CFG->current_app->getUrl()."/course/certifications"));
-        $content .= html_writer::end_tag('a');
-        $content .= html_writer::end_tag('li');		
+		if($cert_products_count > 0) {
+			$content .= html_writer::start_tag('li');
+			$content .= html_writer::nonempty_tag('a', 'Certifications',
+					array('href'=> $CFG->current_app->getUrl()."/course/certifications"));
+			$content .= html_writer::end_tag('a');
+			$content .= html_writer::end_tag('li');	
+		}		
 
         $role_manager = $CFG->current_app->getCurrentUser()->getRoleManager();
         

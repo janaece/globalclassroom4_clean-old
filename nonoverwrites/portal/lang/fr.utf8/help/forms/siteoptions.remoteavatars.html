@@ -1,0 +1,16 @@
+<h3>Afficher des avatars distants</h3>
+
+<p>Si cette option est activ&eacute;e,
+le service <a href="http://www.gravatar.com">Gravatar</a> sera utilis&eacute; pour afficher les avatars des utilisateurs qui n'auront pas t&eacute;l&eacute;charg&eacute; d'image dans leur profil. Ceci permet aux utilisateurs de placer une fois pour toutes un portrait dans Gravatar et de ne pas &ecirc;tre oblig&eacute;s de t&eacute;l&eacute;charger, pour chaque site et service, une image pour afficher leur avatar. (Si Gravatar ne trouve pas d'image pour un utilisateur, c'est l'avatar donn&eacute; par d&eacute;faut qui sera affich&eacute;).</p>
+
+<h4>Raisons de ne pas utiliser cette option</h4>
+
+<p>Cette option devrait &ecirc;tre d&eacute;sactiv&eacute;e pour des installations o&ugrave; le serveur <b>n'a pas acc&egrave;s au r&eacute;seau Internet</b> (par exemple sur un r&eacute;seau Intranet bloqu&eacute;). Si Gravatar est activ&eacute; sur des installations de ce type, cela ajoute des d&eacute;lais &agrave; l'affichage des pages pour rien.</p>
+
+<p>De m&ecirc;me si votre installation utilise <b>le protocole prot&eacute;g&eacute; https</b>, votre navigateur risque d'afficher r&eacute;guli&egrave;rement des alertes de s&eacute;curit&eacute;, les images de Gravatar &eacute;tant envoy&eacute;e en mode non prot&eacute;g&eacute; par le protocole http standard.</p>
+
+<h4>Serveur Gravatar priv&eacute;</h4>
+
+<p>Si vous h&eacute;bergez un serveur qui comprend le protocole Gravatar, vous pouvez l'utiliser en donnant son url dans le fichier config.php :</p>
+
+<p><code>$cfg->remoteavatarbaseurl = 'http://votreserveur.com/avatar/';</code></p>

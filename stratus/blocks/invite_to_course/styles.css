@@ -1,0 +1,11 @@
+root { 
+    display: block;
+}
+#invite_button {
+    float: right;
+}
+
+#emailinputbox {
+    width: 70%;
+}
+

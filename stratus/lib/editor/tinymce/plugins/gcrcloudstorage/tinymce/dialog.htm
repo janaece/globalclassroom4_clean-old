@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#gcrcloudstorage.desc}</title>
+        <script>
+            var editor_tinymce_include = function(path) {
+                document.write('<script type="text/javascript" src="' +
+                    parent.tinyMCE.baseURL + '/' + path + '"></' + 'script>');
+            };
+            editor_tinymce_include('tiny_mce_popup.js');
+        </script>
+	<script type="text/javascript" src="js/dialog.js"></script>
+        <style type="text/css">
+            .mceActionPanelCloudStorage {position: absolute; bottom: 0; width:95%}
+            .mceCancelButton {float:right}
+        </style>
+</head>
+<body>
+
+<form id="GcrCloudStorageForm" onsubmit="GcrcloudstorageDialog.insert();return false;" action="#">
+	<p>Please choose a file from your cloud storage and select a file type.</p><br />
+        <table cellpadding="5px">
+            <tr>
+                <td>
+                    Display Text:
+                </td>
+                <td>
+                    <input id="linkDisplayText" name="linkDisplayText"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Cloud Storage File:
+                </td>
+                <td>
+                    <select id="cloud_storage_file" name="cloud_storage_file" class="select"></select>
+                </td>    
+            </tr>
+            <tr>
+                <td>
+                    File Type:
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><input id="filetypevideo" name="filetype" type="radio" class="radio">Video</input></td>
+                            <td><input id="filetypeaudio" name="filetype" type="radio" class="radio">Audio</input></td>
+                        </tr>
+                        <tr>
+                            <td><input id="filetypeimage" name="filetype" type="radio" class="radio">Image</input></td>
+                            <td><input id="filetypelink" name="filetype" type="radio" class="radio">Other</input></td>
+                        </tr>
+                    </table>    
+                </td>
+            </tr>
+        </table>
+
+	<div class="mceActionPanelCloudStorage">
+            <input type="button" id="insert" name="insert" value="{#insert}" onclick="GcrcloudstorageDialog.insert();" />
+            <input class="mceCancelButton" type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+	</div>
+</form>
+
+</body>
+</html>

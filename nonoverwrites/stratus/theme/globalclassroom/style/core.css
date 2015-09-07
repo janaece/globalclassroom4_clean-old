@@ -1,0 +1,13 @@
+html{
+    height:100%;
+    background-image: [[setting:backgroundimage]];
+    background-color: [[setting:backgroundcolor]];
+}
+
+a:link {color: #039;text-decoration:none;}
+
+a:visited {color: #039;}
+
+h1{font-size:2em;}
+
+body { color: #333;padding-bottom: 25px;font-family:Arial, helvetica, sans-serif;font-size:75%;line-height:1.6667em;padding:0;}

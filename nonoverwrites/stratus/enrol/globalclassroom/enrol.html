@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    jQuery(function(){
+        document.gc_enrol_form.submit();
+    });
+</script>    
+<div align="center">
+    <p><b><?php echo get_string("cost") . ': ' . GcrPurchaseTable::gc_format_money($cost); ?></b></p>
+    <p><img alt="MasterCard, Visa, American Express, Discover are Accepted" src="<?php echo $CFG->current_app->getUrl(); ?>/images/creditcards.jpeg" /></p>
+    <p><?php print_string("paymentinstant") ?></p>
+    <?php
+        $purchaseurl = $CFG->current_app->getUrl() . '/purchase/coursePurchase';
+    ?>
+    <form name="gc_enrol_form" id="gc_enrol_form" action="<?php echo $purchaseurl ?>" method="post">
+        <input type="hidden" name="type" value="course" />
+        <input type="hidden" name="type_id" value="<?php print $course->id; ?>" />
+        <input type="hidden" name="purchase_token" value="<?php print GcrEschoolTable::generateRandomString(); ?>" />
+        <input type="submit" value="Purchase Course" />
+    </form>
+</div>

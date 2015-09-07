@@ -1,0 +1,83 @@
+#page {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pagelayout-report #page {
+    width: 95%;
+}
+
+#page-content {
+    background-color: #FFF;
+    min-width: 735px;
+    -webkit-box-shadow: 5px 0 4px -4px rgba(0,0,0,0.6), -5px 0 4px -4px rgba(0,0,0,0.6);
+    -moz-box-shadow:  5px 0 4px -4px rgba(0,0,0,0.6), -5px 0 4px -4px rgba(0,0,0,0.6);
+    box-shadow:  5px 0 4px -4px rgba(0,0,0,0.6), -5px 0 4px -4px rgba(0,0,0,0.6);
+}
+
+div#messages {
+    text-align: center;
+}
+
+div.purgecaches {
+    background-color: #FFF;
+}
+
+div.enrolmenticons {
+    display: none;
+}
+
+div.generalbox {
+    border: 1px solid #DDD;
+}
+
+.mform fieldset {
+    border: 1px solid #DDD;
+}
+
+div.loginbox, div.onecolumn {
+    margin: auto;
+    text-align: center;
+}
+
+.course-content ul.weeks li.section .content,
+.path-course-view .weeks .content,
+.path-course-view .topics .content,
+.path-course-view .weeks .section,
+.path-course-view .topics .section {
+    background: #FFFFFF;
+}
+
+p, fieldset, table, pre {
+    margin-top: 1em;
+}
+
+div.multichoice .content .formulation .ablock .answer label {
+    padding-left: 5px;
+}
+
+img.iconsmall
+{
+    height: 14px;
+    width: 14px;
+    margin-right: 2px;
+}
+
+.block .header .commands .icon img
+{
+    height: 14px;
+    width: 14px;
+    margin-right: 2px;
+}
+
+.gc_course_list_item_icon
+{
+    width: 120px; height: 120px; overflow: hidden; margin:5px auto
+}
+
+.gc_course_list_item_icon img
+{
+    min-height: 120px;
+    min-width: 120px;
+}

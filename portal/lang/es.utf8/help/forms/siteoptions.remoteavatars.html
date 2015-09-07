@@ -1,0 +1,26 @@
+<h3> Pantalla remota avatares </h3>
+
+<p> Si esta opcion esta activada,
+<a href="http://www.gravatar.com"> Gravatar </a> de servicios en linea se
+utiliza para mostrar los iconos de perfil para los usuarios que no tienen un sistema en
+Mahara. Esto permite a los usuarios configurar su perfil de icono de una vez en el Gravatar
+sitio en lugar de tener que hacerlo en cada Mahara y de servicios en linea
+individualmente. (Si Gravatar no tiene un icono para ese usuario, entonces el
+por defecto el icono Mahara sera mostrado.) </p>
+
+Razones <h4> Para desactivarlo </h4>
+
+<p> Esta opcion debe estar deshabilitada en las instalaciones (tales como bloqueado
+intranets) donde los usuarios <b> no tienen acceso a Internet en general </b>. Uso de
+Gravatar en un ambiente simplemente en un retraso adicional. </p>
+
+<p> Ademas, para los sitios <b> prestados a traves de https </b>, lo que permite el perfil Gravatar
+iconos podrian dar lugar a advertencias de seguridad en algunos navegadores. Esto se debe a la
+hecho de que las imagenes Gravatar se sirven a traves de http normal sin cifrar. </p>
+
+<h4> Avatar personalizado servidor </h4>
+
+<p> Si usted tiene un servidor avatar personalizado que implementa la Gravatar
+protocolo, es posible especificar la URL base de tu archivo config.php: </p>
+
+<p><code>$cfg->remoteavatarbaseurl = 'http://example.com/avatar/';</code></p>
