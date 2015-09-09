@@ -539,8 +539,11 @@ if ($measure_time == 1) {
 							//$ctlg_courses_list = array();
 						//}
 					?>
-					<p><a data-toggle="collapse" data-parent="#accordion" id="a_cert_collapseCourse_<?php echo $products_detail_val["institution_short_name"]."_".$products_detail_val["id"] . "_" . $ctlg_crse_list_key; ?>" href="#cert_collapseCourse_<?php echo $products_detail_val["institution_short_name"]."_".$products_detail_val["id"] . "_" . $ctlg_crse_list_key; ?>" class="catalog-accordion"><?php echo $ctlg_crse_list_val; ?>&nbsp;<i class="fa fa-folder-open-o"></i></a>
-					<input type="hidden" id="<?php echo $ctlg_crse_list_key; ?>_paid_flag" value="<?php echo $button_flag; ?>" />
+					<p>
+					<div class="ajax_link_div">
+					<a data-toggle="collapse" data-parent="#accordion" id="a_cert_collapseCourse_<?php echo $products_detail_val["institution_short_name"]."_".$products_detail_val["id"] . "_" . $ctlg_crse_list_key; ?>" href="#cert_collapseCourse_<?php echo $products_detail_val["institution_short_name"]."_".$products_detail_val["id"] . "_" . $ctlg_crse_list_key; ?>" class="catalog-accordion"><?php echo $ctlg_crse_list_val; ?>&nbsp;<i class="fa fa-folder-open-o"></i></a>
+					<input type="hidden" id="<?php echo $ctlg_crse_list_key; ?>_paid_flag" value="<?php echo $button_flag; ?>" class="button_flag" />
+					</div>
 					</p>
 					
 					<div id="cert_collapseCourse_<?php echo $products_detail_val["institution_short_name"]."_".$products_detail_val["id"] . "_" . $ctlg_crse_list_key; ?>" class="panel-collapse collapse">
@@ -568,8 +571,10 @@ jQuery(document).ready( function () {
 		var product_id = id_arr[id_arr.length - 2];
 		var institution = id_arr[id_arr.length - 3];
 		//console.log(id_arr);
-		var paid_flag = $("#"+catalog_key+"_paid_flag").val();
-		//console.log(catalog_key);
+		//var paid_flag = $("#"+catalog_key+"_paid_flag").val();
+		var paid_flag = $(this).parents("div.ajax_link_div").find(".button_flag").val();
+		
+		console.log(paid_flag);
 		//if(!$("#"+div_id_obj).hasClass("in")) {
 		$("#"+div_id_obj).find("div.courses_ajax_content").html("");
 		$("#"+div_id_obj).find("div.ajax_loading_div").show();
