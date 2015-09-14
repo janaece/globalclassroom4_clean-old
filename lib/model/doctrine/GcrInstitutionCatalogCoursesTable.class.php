@@ -50,7 +50,7 @@ class GcrInstitutionCatalogCoursesTable extends Doctrine_Table
 		return($result[0]["p_SUM"]);
 	}
 
-		public static function getCertificationCoursesCount($platform_short_name) {
+	public static function getCertificationCoursesCount($platform_short_name) {
 		$q = Doctrine_Query::create()
 		  ->select('SUM(p.courses_count)')
 		  ->from('GcrInstitutionCatalogCourses p')
@@ -61,4 +61,40 @@ class GcrInstitutionCatalogCoursesTable extends Doctrine_Table
 		//print_r($result);
 		return($result[0]["p_SUM"]);
 	}
+	
+	public static function getSubscriptionCourses($platform_short_name) {
+		$q = Doctrine_Query::create()
+		  ->select('p.*')
+		  ->from('GcrInstitutionCatalogCourses p')
+		  ->where('p.product_type_id = ?', 1)
+		  ->andWhere('p.platform_short_name = ?', $platform_short_name)
+		  ->orderBy('p.id ASC');
+		$result = $q->execute(array(), Doctrine::HYDRATE_SCALAR);
+		//print_r($result);
+		return($result);		
+	}
+	
+	public static function getIndividualCourses($platform_short_name) {
+		$q = Doctrine_Query::create()
+		  ->select('p.*')
+		  ->from('GcrInstitutionCatalogCourses p')
+		  ->where('p.product_type_id = ?', 2)
+		  ->andWhere('p.platform_short_name = ?', $platform_short_name)
+		  ->orderBy('p.id ASC');
+		$result = $q->execute(array(), Doctrine::HYDRATE_SCALAR);
+		//print_r($result);
+		return($result);		
+	}
+
+	public static function getCertificationCourses($platform_short_name) {
+		$q = Doctrine_Query::create()
+		  ->select('p.*')
+		  ->from('GcrInstitutionCatalogCourses p')
+		  ->where('p.product_type_id = ?', 3)
+		  ->andWhere('p.platform_short_name = ?', $platform_short_name)
+		  ->orderBy('p.id ASC');
+		$result = $q->execute(array(), Doctrine::HYDRATE_SCALAR);
+		//print_r($result);
+		return($result);		
+	}	
 }

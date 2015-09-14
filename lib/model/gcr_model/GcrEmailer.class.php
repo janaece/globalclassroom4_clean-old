@@ -54,7 +54,7 @@ class GcrEmailer
 
         $this->replyto = $replyto;
         $this->bcc = "orderprocessing@globalclassroom.us";
-        $this->bcc = "nandakumar54321@gmail.com";
+        //$this->bcc = "nandakumar54321@gmail.com";
         // include handy html segments which get used by numerous emails we send.
         $this->params['header_image'] = '<p><a href="http://' . gcr::frontPageDomain . '"><img style="border:none" src="' . GcrInstitutionTable::getHome()->getUrl() . '/images/gc3_logo.jpg" alt="" /></a></p>';
         $this->params['powered_by_GC'] = '<p><a href="http://' . gcr::frontPageDomain . '"><img src="' . GcrInstitutionTable::getHome()->getUrl() . '/images/poweredbyGC.png" alt="" /></a></p>';

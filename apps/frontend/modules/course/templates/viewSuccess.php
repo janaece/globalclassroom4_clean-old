@@ -163,8 +163,8 @@ foreach($ind_products_list as $product_list_key=>$product_list_val)
 {
 	$network_id_val = $ind_products_details[$product_list_key]["network_id"];	
 	$institution_name = $products_list_institution[$product_list_key];
-	$mhr_institution_obj = $CFG->current_app->selectFromMhrTable('institution', 'name', $institution_name, true);
-	if ($mhr_institution_obj) {
+	//$mhr_institution_obj = $CFG->current_app->selectFromMhrTable('institution', 'name', $institution_name, true);
+	//if ($mhr_institution_obj) {
 /*
 	$mhr_institution = new GcrMhrInstitution($mhr_institution_obj, $CFG->current_app);
 		$potential_eschools = array();
@@ -203,13 +203,12 @@ foreach($ind_products_list as $product_list_key=>$product_list_val)
 					$ind_ctlg_crse_lists[$product_list_key] = $eschool_val;
 					$ind_all_catalogs_list[] = $eschool_val;
 				//}
-			}		
+			}
 		}
-
-		
-	} else {
+/* 	} else {
 		$ind_ctlg_crse_count[$product_list_key] = 0;
-	}
+	} */
+	
 }
 
 /*
@@ -283,13 +282,13 @@ foreach($ind_products_details as $products_detail_key=>$products_detail_val) {
 					<p>
 					<a class="" href="#<?php echo $products_detail_val["short_name"] ?>">
 					<img src="<?php print $CFG->current_app->getAppUrl(); ?>theme/globalclassroom/static/images/<?php echo $products_detail_val["icon"]; ?>" alt="<?php echo $products_detail_val["full_name"]; ?>" /></a>
-					<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOneCS<?php echo $products_detail_val["id"]; ?>" >
+					<a class="view_details" data-toggle="collapse" data-parent="#accordion1" href="#collapseOneCS<?php echo $products_detail_val["id"]; ?>" >
 					<span style="font-size: 16px; font-weight: bold; color:"><?php echo $products_detail_val["full_name"]; ?> </span>
 					</a><!-- : <?php echo $products_detail_val["pricing_html"]; ?>--> </p>
 					</div>
 					<div class="col-md-3 col-md-offset-3" style="padding-top:20px;">
-						<a class="btn btn-info view_details view" data-toggle="collapse" data-parent="#accordion2" href="#collapseOneCS<?php echo $products_detail_val["id"]; ?>">
-						<strong>
+						<a class="btn btn-info view_details" data-toggle="collapse" data-parent="#accordion2" href="#collapseOneCS<?php echo $products_detail_val["id"]; ?>">
+						<strong id="text_collapseOneCS<?php echo $products_detail_val["id"]; ?>" class="view text-view">
 						View Details
 						</strong>
 						</a>
@@ -608,17 +607,66 @@ jQuery(document).ready( function () {
 		var curr_href = $(this).attr("href");
 		//alert(curr_href);
 		curr_href = curr_href.replace("#", "");
+/* 		jQuery(".text-view").each(function(){
+			if(!$(this).hasClass("view")) {
+				$(this).addClass("view");
+				$(this).html("View Details");
+				//$(this).parents("a").toggleClass('view_details');
+			}
+		});		
+		if($("#text_"+curr_href).hasClass("view")) {
+			$("#text_"+curr_href).removeClass("view");
+			$("#text_"+curr_href).html("Hide Details");
+		} else {
+			$("#text_"+curr_href).addClass("view");
+			$("#text_"+curr_href).html("View Details");
+		} */	
 		$("html, body").animate({ scrollTop: ($("div#"+curr_href).offset().top - 150) }, 500);		
 	});
-/* 	jQuery(document).on('click', '.view_details', function() {
-		if($(this).hasClass("view")) {
-			$(this).removeClass("view");
+ 	//jQuery(document).on('click', '.view_details', function() {
+	/*jQuery('.view_details').click(function(){
+/* 		var curr_href = $(this).attr("href");
+		alert(curr_href);
+		curr_href = curr_href.replace("#", "");		
+		if($("div#"+curr_href).hasClass("in")) {
+			alert("hide");
+			//$(this).removeClass("view");
 			$(this).find("strong").html("Hide Details");
 		} else {
-			$(this).addClass("view");
-			$(this).find("strong").html("View Details");			
+			alert("view");
+			//$(this).addClass("view");
+			$(this).find("strong").html("View Details 123");			
+		} * /
+/* 		var $this = $(this);
+ 		var curr_href = $(this).attr("href");
+		curr_href = curr_href.replace("#", "");		
+		$this.toggleClass('view_details');
+		if($this.hasClass('view_details')){
+			//$(this).find("strong").html("View Details");
+			$("#text_"+curr_href).html("View Details");
+		} else {
+			//$(this).find("strong").html("Hide Details");
+			$("#text_"+curr_href).html("Hide Details");
+		} * /
+
+ 		var $this = $(this);
+ 		var curr_href = $(this).attr("href");
+		curr_href = curr_href.replace("#", "");
+		if($("#text_"+curr_href).hasClass("view")) {
+			$("#text_"+curr_href).removeClass("view");
+			$("#text_"+curr_href).html("Hide Details");
+		} else {
+			jQuery(".text-view").each(function(){
+				if(!$(this).hasClass("view")) {
+					$(this).addClass("view");
+					$(this).html("View Details");
+					//$(this).parents("a").toggleClass('view_details');
+				}
+			});
+			$("#text_"+curr_href).addClass("view");
+			$("#text_"+curr_href).html("View Details");
 		}
-	});	 */
+	});*/
 });		
 	
 </script>

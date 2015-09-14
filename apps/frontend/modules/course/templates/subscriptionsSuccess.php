@@ -222,7 +222,7 @@ $time_start = microtime_float();
 		$catalog_courses_count[$eschool->getShortName()] = $ctlg_courses_list;
 	}
  */	
-	$catalog_courses_count = array();
+	//$catalog_courses_count = array();
 	$lib_ctlg_crse_lists = array();
 	$lib_ctlg_crse_count = array();
 	$all_catalogs_list = array();
@@ -266,12 +266,12 @@ $time_start = microtime_float();
 
 			foreach($current_eschools as $current_eschool_key=>$current_eschool_val) {
 				if((stripos(strtolower($current_eschool_val), "(*)") === false) && (stripos(strtolower($current_eschool_val), "($)") === false)) {
-					$params = array();
+/* 					$params = array();
 					$params["start_index"] = 0;
 					$params["mode"] = "Eschool";
 					$params["mode_id"] = $current_eschool_key;
 					$this->course_list = new GcrCourseList($params, $CFG->current_app);
-					$catalog_courses_count[$current_eschool_key] = $this->course_list->getCoursesCount();
+					$catalog_courses_count[$current_eschool_key] = $this->course_list->getCoursesCount(); */
 					if(isset($catalog_courses_count[$current_eschool_key]) && $catalog_courses_count[$current_eschool_key] > 0) {
 						$lib_ctlg_crse_count[$library_list_key] = $lib_ctlg_crse_count[$library_list_key] + $catalog_courses_count[$current_eschool_key];
 						$all_catalogs_count = $all_catalogs_count + $catalog_courses_count[$current_eschool_key];
@@ -665,12 +665,12 @@ jQuery(document).ready( function () {
 		curr_href = curr_href.replace("#", "");
 		$("html, body").animate({ scrollTop: ($("div#"+curr_href).offset().top - 150) }, 500);		
 	});
-/* 	jQuery(document).on('click', '.view_details', function() {
-		if($(this).hasClass("view")) {
-			$(this).removeClass("view");
+/*  	jQuery(document).on('click', '.view_details', function() {
+		if($(this).hasClass("in")) {
+			//$(this).removeClass("view");
 			$(this).find("strong").html("Hide Details");
 		} else {
-			$(this).addClass("view");
+			//$(this).addClass("view");
 			$(this).find("strong").html("View Details");			
 		}
 	}); */
