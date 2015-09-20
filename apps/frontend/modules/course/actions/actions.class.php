@@ -53,7 +53,7 @@ class courseActions extends sfActions
         $this->params = $request->getGetParameters();
         $this->course = false;
 		$this->current_app_short_name = $CFG->current_app->getShortName();
-        if (isset($this->params['course']) && isset($this->params['catalog'])) {
+/*         if (isset($this->params['course']) && isset($this->params['catalog'])) {
             $eschool = GcrEschoolTable::getEschool($this->params['catalog'], true);
             if ($eschool) {
                 $course = $eschool->getCourse($this->params['course']);
@@ -61,8 +61,8 @@ class courseActions extends sfActions
                     $this->course = $course;
                 }
             }
-        }
- 		// gets all available schools
+        } */
+/*  		// gets all available schools
  		$eschool_array = array();
 		$catalog_courses_count = array();
 		foreach($CFG->current_app->getMnetEschools() as $eschool) {
@@ -77,7 +77,15 @@ class courseActions extends sfActions
 			$catalog_courses_count[$eschool->getShortName()] = $this->getHTMLCoursesCount($eschool->getShortName());
 		}
 		//print_r($catalog_courses_count);
+		$this->catalog_courses_count = $catalog_courses_count; */
+		
+		$catalog_courses_count = array();
+		$ctlg_crse_data = GcrInstitutionCatalogCoursesTable::getIndividualCourses($this->current_app_short_name);
+		foreach($ctlg_crse_data as $ctlg_crse) {
+			$catalog_courses_count[$ctlg_crse["p_catalog_short_name"]] = $ctlg_crse["p_courses_count"];
+		}
 		$this->catalog_courses_count = $catalog_courses_count;
+		
 		// gets individual courses - products list
 		$ind_products = GcrProductsTable::getProductIndividuals($this->current_app_short_name);
 		$ind_products_list = array();
@@ -121,7 +129,7 @@ class courseActions extends sfActions
         $this->params = $request->getGetParameters();
         $this->course = false;
 		$this->current_app_short_name = $CFG->current_app->getShortName();
-        if (isset($this->params['course']) && isset($this->params['catalog'])) {
+/*         if (isset($this->params['course']) && isset($this->params['catalog'])) {
             $eschool = GcrEschoolTable::getEschool($this->params['catalog'], true);
             if ($eschool) {
                 $course = $eschool->getCourse($this->params['course']);
@@ -145,7 +153,15 @@ class courseActions extends sfActions
 			$catalog_courses_count[$eschool->getShortName()] = $this->getHTMLCoursesCount($eschool->getShortName());
 		}
 		//print_r($catalog_courses_count);
-		$this->catalog_courses_count = $catalog_courses_count;
+		$this->catalog_courses_count = $catalog_courses_count; */
+		
+		$catalog_courses_count = array();
+		$ctlg_crse_data = GcrInstitutionCatalogCoursesTable::getCertificationCourses($this->current_app_short_name);
+		foreach($ctlg_crse_data as $ctlg_crse) {
+			$catalog_courses_count[$ctlg_crse["p_catalog_short_name"]] = $ctlg_crse["p_courses_count"];
+		}
+		$this->catalog_courses_count = $catalog_courses_count;		
+		
 		// gets certification courses - products list
 		$cert_products = GcrProductsTable::getProductCertifications($this->current_app_short_name);
 		$cert_products_list = array();
@@ -205,11 +221,16 @@ class courseActions extends sfActions
 			$catalog_courses_count[$eschool->getShortName()] = $ctlg_courses_list;
 		}
 		$this->catalog_courses_count = $catalog_courses_count; */
+		
+		$catalog_courses_count = array();
+		$ctlg_crse_data = GcrInstitutionCatalogCoursesTable::getSubscriptionCourses($this->current_app_short_name);
+		foreach($ctlg_crse_data as $ctlg_crse) {
+			$catalog_courses_count[$ctlg_crse["p_catalog_short_name"]] = $ctlg_crse["p_courses_count"];
+		}
+		$this->catalog_courses_count = $catalog_courses_count;		
+		
 		// gets subscriptions products
 		$products = GcrProductsTable::getProductLibraries($this->current_app_short_name);
-		
-		//$ins_prod_orders = GcrInstitutionProductOrdersTable::get_orders("lcrcconline", "microsoft", 6);
-		
 		$products_list = array();
 		$products_list_institution = array();
 		$products_details = array();
@@ -605,7 +626,7 @@ class courseActions extends sfActions
         global $CFG;
         $CFG->current_app->requireMahara();
         $this->params = $request->getGetParameters();
-		$platform_short_name = isset($this->params['platform']) ? $this->params['platform'] : "";
+		$platform_short_name = $CFG->current_app->getShortName();
 		$product_type = isset($this->params['type']) ? $this->params['type'] : "";
 
  		// gets all available schools
@@ -675,9 +696,9 @@ class courseActions extends sfActions
 							$params["mode_id"] = $current_eschool_key;
 							$this->course_list = new GcrCourseList($params, $CFG->current_app);
 							$catalog_courses_count[$current_eschool_key] = $this->course_list->getCoursesCount();
-							$is_exist = GcrInstitutionCatalogCoursesTable::checkIsExist($product->getInstitutionShortName(), $product->getCatalogShortName(), $product->getPlatformShortName());
+							$is_exist = GcrInstitutionCatalogCoursesTable::checkIsExist($product->getInstitutionShortName(), $current_eschool_key, $product->getPlatformShortName());
 							$ctlg_crses_count = isset($catalog_courses_count[$current_eschool_key]) ? $catalog_courses_count[$current_eschool_key] : 0;
-							if($is_exist == 0) {
+ 							if($is_exist == 0) {
 								$cron_obj = new GcrInstitutionCatalogCourses();
 								$cron_obj->setPlatformShortName($product->getPlatformShortName());
 								$cron_obj->setInstitutionShortName($product->getInstitutionShortName());
@@ -691,7 +712,7 @@ class courseActions extends sfActions
 									->set('courses_count', '?', $ctlg_crses_count)
 									->where('institution_short_name = ?', $product->getInstitutionShortName())
 									->andWhere('platform_short_name = ?', $product->getPlatformShortName())
-									->andWhere('catalog_short_name = ?', $product->getCatalogShortName())
+									->andWhere('catalog_short_name = ?', $current_eschool_key)
 									->andWhere('product_type_id = ?', $product->getProductTypeId())
 									->execute();	
 							}
