@@ -1,5 +1,4 @@
 <?php
-exit;
   global $USER;
   $app = gcr::getApp();
 
