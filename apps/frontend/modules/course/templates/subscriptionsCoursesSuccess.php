@@ -50,12 +50,12 @@ foreach($ctlg_courses_list as $course_list) {
 			<td width="25%" nowrap style="width: 30%;">
 				<div id="gc_course_list">
 				<div id="gc_course_list_settings" style="margin: 0px">
-				<div id="gc_course_list_container_<?php echo $ctlg_crse_list_key; ?>" class="transitions-enabled infinite-scroll clearfix">
+				<div id="gc_course_list_container_<?php echo $institution."_".$product_id . "_" . $ctlg_crse_list_key; ?>" class="transitions-enabled infinite-scroll clearfix">
 				<div class="gc_course_list_item col2">										
 					<div id="<?php print $id ?>" class="gc_course_list_item_container">
 						<div class="gc_course_list_item_header">
 							 <div class="gc_course_list_item_title gc_course_list_item_container_element ">
-								 <a title="<?php print $fullname; ?>" href="">
+								 <a title="<?php print $fullname; ?>" href="javascript:;" class="crse_learn_link">
 									<?php 
 									if ($button_flag > 0) {	
 										echo "Learn&nbsp;More";
@@ -97,7 +97,7 @@ foreach($ctlg_courses_list as $course_list) {
 				<script>
 				jQuery(function()
 				{
-				var $container = jQuery('#gc_course_list_container_<?php echo $ctlg_crse_list_key; ?>');
+				var $container = jQuery('#gc_course_list_container_<?php echo $institution."_".$product_id . "_" . $ctlg_crse_list_key; ?>');
 				});
 				</script>
 				</div>
@@ -123,5 +123,10 @@ foreach($ctlg_courses_list as $course_list) {
 //echo "</br>Course ajax View End: ".date("Y-m-d H:i:s")."</br>";
 ?>
 <script type="text/javascript">
-$gc_course_viewer.addNewCourseListItemsEventListeners();
+//$gc_course_viewer.addNewCourseListItemsEventListeners();
+jQuery(document).on('click', '.crse_learn_link', function(){
+	//alert("clicked");
+	$gc_course_viewer.addNewCourseListItemsEventListeners();
+	jQuery(this).parents('.gc_course_list_item_title').click();
+});
 </script>

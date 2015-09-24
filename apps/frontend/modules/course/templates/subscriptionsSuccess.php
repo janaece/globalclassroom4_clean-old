@@ -574,7 +574,7 @@ jQuery(document).ready( function () {
 		//var paid_flag = $("#"+catalog_key+"_paid_flag").val();
 		var paid_flag = $(this).parents("div.ajax_link_div").find(".button_flag").val();
 		
-		console.log(paid_flag);
+		//console.log(paid_flag);
 		//if(!$("#"+div_id_obj).hasClass("in")) {
 		$("#"+div_id_obj).find("div.courses_ajax_content").html("");
 		$("#"+div_id_obj).find("div.ajax_loading_div").show();
