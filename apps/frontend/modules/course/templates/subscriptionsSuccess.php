@@ -643,7 +643,7 @@ if ($measure_time == 1) {
 </section>
 </div>
 <script type="text/javascript">
-$gc_course_viewer.addNewCourseListItemsEventListeners(); 
+//$gc_course_viewer.addNewCourseListItemsEventListeners(); 
 /* jQuery("#course_detail_goto_button").click(function() 
 {
 	var html = '<br /><br /><h3 style="margin:10px">Loading course...</h3>';

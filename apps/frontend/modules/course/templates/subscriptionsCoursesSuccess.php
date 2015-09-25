@@ -123,10 +123,17 @@ foreach($ctlg_courses_list as $course_list) {
 //echo "</br>Course ajax View End: ".date("Y-m-d H:i:s")."</br>";
 ?>
 <script type="text/javascript">
+var trig_on_click = 0;
 //$gc_course_viewer.addNewCourseListItemsEventListeners();
 jQuery(document).on('click', '.crse_learn_link', function(){
 	//alert("clicked");
 	$gc_course_viewer.addNewCourseListItemsEventListeners();
-	jQuery(this).parents('.gc_course_list_item_title').click();
+	if(trig_on_click == 0) {
+		jQuery(this).parents('.gc_course_list_item_title').click();
+		trig_on_click = 1;
+	}
+});
+jQuery(document).on('click', '.paginate_button ', function(){
+	if(!jQuery(this).hasClass("current")) trig_on_click = 0;
 });
 </script>
