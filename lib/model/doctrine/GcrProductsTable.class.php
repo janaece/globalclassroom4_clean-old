@@ -115,15 +115,16 @@ class GcrProductsTable extends Doctrine_Table
 	*
 	* @param current app short name $platform
 	* @param institution short name $institution_short_name
-	* @param product type $subscription_type
+	* @param product type $product_type_id
 	*/	
-    public static function getProductDetails($institution_short_name, $subscription_type, $platform)
+    public static function getProductDetails($institution_short_name, $product_type_id, $platform, $product_short_name)
     {
         $products = Doctrine::getTable('GcrProducts')
                 ->createQuery('p')
                 ->where('p.status = ?', 1)
 				->andWhere('p.institution_short_name = ?', $institution_short_name)
-				->andWhere('p.product_type_id = ?', $subscription_type)
+				->andWhere('p.short_name = ?', $product_short_name)
+				->andWhere('p.product_type_id = ?', $product_type_id)
 				->andWhere('p.platform_short_name = ?', $platform)
 				->orderBy('p.id ASC')
                 ->execute();
@@ -176,6 +177,20 @@ class GcrProductsTable extends Doctrine_Table
 			return $products;
         }				
         return false;
-    }	
+    }
+	
+	public static function getProductType($catalog_short_name, $platform_short_name) {
+		$q = Doctrine_Query::create()
+		  ->select('p.product_type_id')
+		  ->from('GcrProducts p')
+		  ->where('p.catalog_short_name = ?', $catalog_short_name)
+		  ->andWhere('p.platform_short_name = ?', $platform_short_name);
+		$result = $q->execute(array(), Doctrine::HYDRATE_SCALAR);
+		if(isset($result[0]) && count($result) > 0) {
+			return($result[0]["p_product_type_id"]);
+		} else {
+			return 1;
+		}	
+	}	
 
 }

@@ -218,6 +218,24 @@ abstract class BaseGcrPurchase extends sfDoctrineRecord
              'primary' => false,
              'length' => 4,
              ));
+        $this->hasColumn('product_short_name', 'string', null, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'notnull' => false,
+             'default' => '',
+             'primary' => false,
+             'length' => '',
+             ));
+		$this->hasColumn('product_type_id', 'integer', 4, array(
+             'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => false,
+             'notnull' => false,
+             'default' => '',
+             'primary' => false,
+             'length' => 4,
+             ));
     }
 
     public function setUp()

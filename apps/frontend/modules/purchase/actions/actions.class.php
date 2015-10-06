@@ -50,11 +50,15 @@ class purchaseActions extends sfActions
         // If the chained payment failed for some reason, we default to standard the
         // Website Payment Pro method.
         $this->form = new GcrPurchaseForm();
-
+		$current_user1 = $CFG->current_app->getCurrentUser();
+		$user1 = $current_user1->getUserOnInstitution();
+		$get_product_type_id = GcrProductsTable::getProductType($CFG->current_app->getShortName(), $user1->getApp()->getShortName());
 
         $this->form->setDefaults(array(	'purchase_type' => $form['type'],
                                         'purchase_type_id' => $form['type_id'],
                                         'purchase_type_eschool_id' => $CFG->current_app->getShortName(),
+										'product_short_name' => "",
+										'product_type_id' => $get_product_type_id,	
                                         'bill_cycle' => 'single',
                                         'purchase_token' => $form['purchase_token']));
         // set up object which hold info about the purchase item to display on form
@@ -112,6 +116,8 @@ class purchaseActions extends sfActions
             $this->form->setDefaults(array( 'purchase_type' => 'classroom',
                                             'purchase_type_id' => $this->eschool->getShortName(),
                                             'purchase_type_eschool_id' => $this->eschool->getShortName(),
+											'product_short_name' => "",
+											'product_type_id' => '0',
                                             'bill_cycle' => $form['bill_cycle'],
                                             'purchase_token' => GcrEschoolTable::generateRandomString()));
             // set up object which hold info about the purchase item to display on form
@@ -141,6 +147,8 @@ class purchaseActions extends sfActions
             $this->form->setDefaults(array( 'purchase_type' => 'membership',
                                             'purchase_type_id' => $CFG->current_app->getShortName(),
                                             'purchase_type_eschool_id' => $CFG->current_app->getShortName(),
+											'product_short_name' => "",
+											'product_type_id' => '0',
                                             'bill_cycle' => $form['bill_cycle'],
                                             'purchase_token' => GcrEschoolTable::generateRandomString()));
             // set up object which hold info about the purchase item to display on form
@@ -170,14 +178,16 @@ class purchaseActions extends sfActions
 		$this->form = new GcrPurchaseForm();
 		// sets institution, product short names and product type
 		$this->form->setDefaults(array( 'purchase_type' => 'subscription',
-										'purchase_type_id' => $this->params["institution"] . "~" . $this->params["type"],
+										'purchase_type_id' => $this->params["institution"],
+										'product_short_name' => $this->params["product"],
+										'product_type_id' => $this->params["type"],
 										'purchase_type_eschool_id' => $CFG->current_app->getShortName(),
 										'bill_cycle' => $bill_cycle,
 										'purchase_token' => GcrEschoolTable::generateRandomString()));
 		// set up object which hold info about the purchase item to display on form
 		$this->purchaseObject = new StdClass();
 		$this->hydratePurchaseObject($this->purchaseObject, 'subscription',
-				$this->params["institution"] . "~" . $this->params["type"], $CFG->current_app->getShortName(), $bill_cycle);
+				$this->params["institution"], $CFG->current_app->getShortName(), $bill_cycle, $this->params["product"], $this->params["type"]);
 		$this->getResponse()->setTitle('Subscription Purchase');
     }	
     public function executeClassroom(sfWebRequest $request)
@@ -233,6 +243,8 @@ class purchaseActions extends sfActions
             $this->form->setDefaults(array( 'purchase_type' => 'eschool',
                                             'purchase_type_id' => $CFG->current_app->getShortName(),
                                             'purchase_type_eschool_id' => $CFG->current_app->getShortName(),
+											'product_short_name' => "",
+											'product_type_id' => '0',
                                             'bill_cycle' => $form['bill_cycle'],
                                             'purchase_token' => $form['token'] ));
             // set up object which hold info about the purchase item to display on form
@@ -263,6 +275,8 @@ class purchaseActions extends sfActions
         $this->form->setDefaults(array(	'purchase_type' => 'sale',
                                         'purchase_type_id' => $form['purchase_item'],
                                         'purchase_type_eschool_id' => GcrInstitutionTable::getHome()->getShortName(),
+										'product_short_name' => "",
+										'product_type_id' => '0',
                                         'bill_cycle' => 'single',
                                         'purchase_token' => $form['token'] ));
         // set up object which hold info about the purchase item to display on form
@@ -313,37 +327,38 @@ class purchaseActions extends sfActions
             $CFG->current_app->gcError('Purchase type ' . $form['purchase_type'] . ': ID ' . $form['purchase_type_id'] .
                     ': Purchase class: ' . $purchase_classname  . ' does not exist', 'purchasetypeinvalid');
         }
-//echo "ok";exit;
         // Now that we have validated the request, we can proceed with processing
         $user = $current_user->getUserOnInstitution();
 
         $this->form = new GcrPurchaseForm();
-        $purchaseFields = array('id' => $form['id'],
-                                'purchase_type' => $form['purchase_type'],
-                                'purchase_type_id' => $form['purchase_type_id'],
-                                'purchase_type_eschool_id' => $form['purchase_type_eschool_id'],
-                                'bill_cycle' => $form['bill_cycle'],
-                                'profile_id' => '',
-                                'trans_time' => time(),
-                                'user_institution_id' => $user->getApp()->getShortName(),
-                                'user_id' => $user->getObject()->id,
-                                'amount' => '0',
-                                'gc_fee' => '0',
-                                'country' => $form['country'],
-                                'zip' => $form['zip'],
-                                'first_name' => $form['first_name'],
-                                'last_name' => $form['last_name'],
-                                'state' => $form['state'],
-                                'city' => $form['city'],
-                                'address' => $form['address'],
-                                'cc_number' => $form['cc_number'],
-                                'cc_type' => $form['cc_type'],
-                                'cc_ccv2' => $form['cc_ccv2'],
-                                'cc_exp_month' => $form['cc_exp_month'],
-                                'cc_exp_year' => $form['cc_exp_year'],
-                                '_csrf_token' => $form['_csrf_token'],
-                                'purchase_token' => $form['purchase_token']);
-
+		$purchaseFields = array('id' => $form['id'],
+							'purchase_type' => $form['purchase_type'],
+							'purchase_type_id' => $form['purchase_type_id'],
+							'purchase_type_eschool_id' => $form['purchase_type_eschool_id'],
+							'bill_cycle' => $form['bill_cycle'],
+							'product_type_id' => $form['product_type_id'],
+							'product_short_name' => $form['product_short_name'],
+							'profile_id' => '',
+							'trans_time' => time(),
+							'user_institution_id' => $user->getApp()->getShortName(),
+							'user_id' => $user->getObject()->id,
+							'amount' => '0',
+							'gc_fee' => '0',
+							'country' => $form['country'],
+							'zip' => $form['zip'],
+							'first_name' => $form['first_name'],
+							'last_name' => $form['last_name'],
+							'state' => $form['state'],
+							'city' => $form['city'],
+							'address' => $form['address'],
+							'cc_number' => $form['cc_number'],
+							'cc_type' => $form['cc_type'],
+							'cc_ccv2' => $form['cc_ccv2'],
+							'cc_exp_month' => $form['cc_exp_month'],
+							'cc_exp_year' => $form['cc_exp_year'],
+							'_csrf_token' => $form['_csrf_token'],
+							'purchase_token' => $form['purchase_token']);			
+								
         if ($purchaseRecord = $this->processForm($purchaseFields, $this->form))
         {
             $billingData = new BillingDataCreditcard($form['first_name'], $form['last_name'], $form['cc_number'],
@@ -361,9 +376,10 @@ class purchaseActions extends sfActions
 				$this->paypal_error = "Something went wrong with your credit card details, please verify your card details and proceed again.";
 			}
         }
+		
         // Transaction failed for some reason(s). Repost the form, error messages will be displayed
         $this->purchaseObject = new StdClass();
-        $this->hydratePurchaseObject($this->purchaseObject, $form['purchase_type'], $form['purchase_type_id'], $form['purchase_type_eschool_id'], $form['bill_cycle']);
+		$this->hydratePurchaseObject($this->purchaseObject, $form['purchase_type'], $form['purchase_type_id'], $form['purchase_type_eschool_id'], $form['bill_cycle'], $form['product_short_name'], $form['product_type_id']);
         $this->getResponse()->setTitle('Purchasing');
         $this->setTemplate($form['purchase_type'] . 'Purchase');
     }
@@ -524,7 +540,7 @@ class purchaseActions extends sfActions
   	$this->redirect($form['edit_fees_return_url']);
     }
     // This function fills out description and price data to be displayed on the purchase form
-    private function hydratePurchaseObject($object, $type, $type_id, $app_id, $bill_cycle = null)
+    private function hydratePurchaseObject($object, $type, $type_id, $app_id, $bill_cycle = null, $product_short_name = "", $product_type_id = "")
     {
         // one case for each purchase type
 		$this->purchaseObject->eschool = $app_id;
@@ -586,8 +602,7 @@ class purchaseActions extends sfActions
 		// subscription
 		else if ($type == 'subscription')
 		{
-			$type_id_arr = explode("~", $type_id);
-			$product_details = GcrProductsTable::getProductDetails($type_id_arr[0], $type_id_arr[1], $app_id);
+			$product_details = GcrProductsTable::getProductDetails($type_id, $product_type_id, $app_id, $product_short_name);
 			foreach($product_details as $product) {
 				$this->purchaseObject->description = 'Subscription for - ' . $product->getFullName();
 				$this->purchaseObject->cost = $product->getCost();

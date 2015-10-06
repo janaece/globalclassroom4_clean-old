@@ -1227,6 +1227,20 @@ GcrPurchase:
       notnull: true
       default: '1'
       primary: false
+    product_short_name:
+      type: string()
+      fixed: false
+      unsigned: false
+      default: ''
+      notnull: false
+      primary: false
+    product_type_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: '0'
+      primary: false
 GcrPurchaseItem:
   connection: doctrine
   tableName: gcr_purchase_item

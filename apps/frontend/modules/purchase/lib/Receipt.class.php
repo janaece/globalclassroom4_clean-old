@@ -33,9 +33,8 @@ class Receipt
         }
         if ($type == 'subscription')
         {
-			$type_id_arr = explode("~", $this->my_purchase->getPurchaseTypeId());
 			$product_name = "Subscription";
-			$product_details = GcrProductsTable::getProductDetails($type_id_arr[0], $type_id_arr[1], $this->my_purchase->getPurchaseTypeEschoolId());
+			$product_details = GcrProductsTable::getProductDetails($this->my_purchase->getPurchaseTypeId(), $this->my_purchase->getProductTypeId(), $this->my_purchase->getPurchaseTypeEschoolId(), $this->my_purchase->getProductShortName());
 			foreach($product_details as $product) {
 				$product_name = $product->getFullName();
 			}

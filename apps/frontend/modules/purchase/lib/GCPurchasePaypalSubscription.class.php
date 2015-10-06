@@ -17,13 +17,10 @@ class GCPurchasePaypalSubscription extends GCPurchasePaypalRecurring
 	*/	
     public function setAmount($amount = null)
     {
-		//echo $this->my_purchase->getPurchaseTypeId()."=".$this->my_purchase->getPurchaseTypeEschoolId();
-		$type_id_arr = explode("~", $this->my_purchase->getPurchaseTypeId());
-		$product_details = GcrProductsTable::getProductDetails($type_id_arr[0], $type_id_arr[1], $this->my_purchase->getPurchaseTypeEschoolId());
+		$product_details = GcrProductsTable::getProductDetails($this->my_purchase->getPurchaseTypeId(), $this->my_purchase->getProductTypeId(), $this->my_purchase->getPurchaseTypeEschoolId(), $this->my_purchase->getProductShortName());
 		foreach($product_details as $product) {
 			$this->amount = $product->getCost();
 		}
-		//echo time()."=".$this->amount;exit;
     }
     public function setGCFee($fee = null)
     {
@@ -45,8 +42,7 @@ class GCPurchasePaypalSubscription extends GCPurchasePaypalRecurring
     {
         //$product_info = 'Subscription, billed ' . $this->my_purchase->getBillCycle() . 'ly';
         $product_full_name = "Subscription";
-		$type_id_arr = explode("~", $this->my_purchase->getPurchaseTypeId());
-		$product_details = GcrProductsTable::getProductDetails($type_id_arr[0], $type_id_arr[1], $this->my_purchase->getPurchaseTypeEschoolId());
+		$product_details = GcrProductsTable::getProductDetails($this->my_purchase->getPurchaseTypeId(), $this->my_purchase->getProductTypeId(), $this->my_purchase->getPurchaseTypeEschoolId(), $this->my_purchase->getProductShortName());
 		foreach($product_details as $product) {
 			$product_full_name = $product->getFullName();
 		}
@@ -63,8 +59,7 @@ class GCPurchasePaypalSubscription extends GCPurchasePaypalRecurring
         $institution = $user->getApp();
         $trial_length = 0;
         $product_full_name = "Subscription";
-		$type_id_arr = explode("~", $this->my_purchase->getPurchaseTypeId());
-		$product_details = GcrProductsTable::getProductDetails($type_id_arr[0], $type_id_arr[1], $this->my_purchase->getPurchaseTypeEschoolId());
+		$product_details = GcrProductsTable::getProductDetails($this->my_purchase->getPurchaseTypeId(), $this->my_purchase->getProductTypeId(), $this->my_purchase->getPurchaseTypeEschoolId(), $this->my_purchase->getProductShortName());
 		foreach($product_details as $product) {
 			$trial_length = $product->getExpiryNoOfDays();
 			$product_full_name = $product->getFullName();
@@ -102,7 +97,6 @@ class GCPurchasePaypalSubscription extends GCPurchasePaypalRecurring
         $mhr_user_obj = $mhr_user->getObject();
         // add as auth type institution user on home to grant access to system
         //$mhr_user->addMhrInstitutionMembership(false, true);
-		$type_id_arr = explode("~", $this->my_purchase->getPurchaseTypeId());
-		$mhr_user->addMhrInstitutionSubscription($type_id_arr[0], true);
+		$mhr_user->addMhrInstitutionSubscription($this->my_purchase->getPurchaseTypeId(), true);
     }
 }
