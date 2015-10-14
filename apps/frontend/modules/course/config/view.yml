@@ -6,4 +6,4 @@ subscriptionsSuccess:
   has_layout: true
   layout:     layout_subscriptions
 subscriptionsCourses:
-  has_layout: false  
+  has_layout: false

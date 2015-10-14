@@ -35,7 +35,8 @@ class GcrInstitutionCatalogCoursesTable extends Doctrine_Table
 		  ->groupBy('p.product_type_id');
 		$result = $q->execute(array(), Doctrine::HYDRATE_SCALAR);
 		//print_r($result);
-		return($result[0]["p_SUM"]);
+		if(isset($result[0])) return($result[0]["p_SUM"]);
+		return 0;
 	}
 	
 	public static function getIndividualCoursesCount($platform_short_name) {
@@ -47,7 +48,8 @@ class GcrInstitutionCatalogCoursesTable extends Doctrine_Table
 		  ->groupBy('p.product_type_id');
 		$result = $q->execute(array(), Doctrine::HYDRATE_SCALAR);
 		//print_r($result);
-		return($result[0]["p_SUM"]);
+		if(isset($result[0])) return($result[0]["p_SUM"]);
+		return 0;
 	}
 
 	public static function getCertificationCoursesCount($platform_short_name) {
@@ -59,7 +61,8 @@ class GcrInstitutionCatalogCoursesTable extends Doctrine_Table
 		  ->groupBy('p.product_type_id');
 		$result = $q->execute(array(), Doctrine::HYDRATE_SCALAR);
 		//print_r($result);
-		return($result[0]["p_SUM"]);
+		if(isset($result[0])) return($result[0]["p_SUM"]);
+		return 0;
 	}
 	
 	public static function getSubscriptionCourses($platform_short_name) {

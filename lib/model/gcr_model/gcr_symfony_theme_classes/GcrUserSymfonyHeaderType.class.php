@@ -37,10 +37,10 @@ class GcrUserSymfonyHeaderType extends GcrSymfonyHeaderType
             <!-- <li><a href="'. $this->institution->getAppUrl() .'view" accesskey="v">Pages</a></li> -->
             <li><a href="'. $this->institution->getAppUrl() .'group/mygroups.php">Groups</a></li>';
 			if ($this->sub_products_count > 0) {
-				$content .= '<li><a href="'. $this->current_app->getUrl() .'/course/subscriptions">Subscriptions</a></li>';
+				$content .= '<li><a href="'. $this->current_app->getUrl() .'/course/subscriptions">All Courses</a></li>';
 			}
 			if ($this->ind_products_count > 0) {
-				$content .= '<li><a href="'. $this->current_app->getUrl() .'/course/view">Courses</a></li>';
+				$content .= '<li><a href="'. $this->current_app->getUrl() .'/course/view">Individual Courses</a></li>';
 			}
 			if ($this->cert_products_count > 0) {
 				$content .= '<li><a href="'. $this->current_app->getUrl() .'/course/certifications">Certifications</a></li>';

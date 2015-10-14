@@ -368,6 +368,36 @@ class courseActions extends sfActions
         return $this->renderText(json_encode($course_list_array));
         
     }
+	
+    public function executeGetSubscriptions(sfWebRequest $request)
+    {
+        $this->forward404Unless($request->isXmlHttpRequest());
+        global $CFG;
+        $CFG->current_app->requireMahara();
+		$CFG->current_app->requireLogin();
+		$this->current_app_short_name = $CFG->current_app->getShortName();
+		$current_user = $CFG->current_app->getCurrentUser();
+		
+		$course_list_array = array();
+		$products = GcrProductsTable::getProductLibraries($this->current_app_short_name);
+		$products_details = array();
+ 		foreach($products as $product) {
+			$mhr_usr_institution = $current_user->checkMhrUsrInstitutionRecord($product->getInstitutionShortName());
+			if($product->getCost() == 0 || $mhr_usr_institution) {
+				$products_list[$product->getShortName()] = $product->getFullName();
+				$products_details[$product->getShortName()]["id"] = $product->getId();
+				$products_details[$product->getShortName()]["short_name"] = $product->getShortName();
+				$products_details[$product->getShortName()]["full_name"] = $product->getFullName();
+				$products_details[$product->getShortName()]["institution_short_name"] = $product->getInstitutionShortName();
+				$products_details[$product->getShortName()]["icon"] = $CFG->current_app->getAppUrl() . "theme/globalclassroom/static/images/" . $product->getIcon();
+				$products_details[$product->getShortName()]["link_href"] = str_replace("/portal", "", $CFG->current_app->getAppUrl()) . "course/subscriptions/#" . $product->getInstitutionShortName()."_".$product->getId();
+			}		
+		}
+		$course_list_array["subsc_list"] = $products_details;
+        $this->getResponse()->setHttpHeader('Content-type', 'application/json');
+        return $this->renderText(json_encode($course_list_array));
+    }	
+	
     // This action assembles a json object which contains all data about
     // a course collection, for use in course listings. 
     public function executeGetHTMLCourseSummary(sfWebRequest $request)
