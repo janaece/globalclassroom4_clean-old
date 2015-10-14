@@ -91,7 +91,7 @@ function mahara_navigation()
 		//Subscriptions link
 		if($sub_products_count > 0) {
 			$content .= html_writer::start_tag('li');
-			$content .= html_writer::nonempty_tag('a', 'Subscriptions',
+			$content .= html_writer::nonempty_tag('a', 'All Courses',
 					array('href'=> $CFG->current_app->getUrl()."/course/subscriptions"));
 			$content .= html_writer::end_tag('a');
 			$content .= html_writer::end_tag('li');
@@ -100,7 +100,7 @@ function mahara_navigation()
 		//Courses link
 		if($ind_products_count > 0) {
 			$content .= html_writer::start_tag('li');
-			$content .= html_writer::nonempty_tag('a', 'Courses',
+			$content .= html_writer::nonempty_tag('a', 'Individual Courses',
 					array('href'=> $CFG->current_app->getUrl()."/course/view"));
 			$content .= html_writer::end_tag('a');
 			$content .= html_writer::end_tag('li');

@@ -38,7 +38,7 @@
                     opacity: .5, 
                     color: '#fff' 
                 } 
-            }); 
+            });
             jQuery.post("/course/getCourses", {list_size: this.list_size, start_index: this.start_index, mode: 'Student'}, function (course_data)
             {
                 var list_complete = (course_data.course_count < mycourses_block.list_size);
@@ -109,9 +109,53 @@
         }
             
     };
+	
+    var gc_mysubscriptions_block =
+    {
+        getSubscriptions: function()
+        {
+            var mysubscriptions_block = this;
+            var container = jQuery('#subscriptionlistcontainer');
+            container.css('min-height', '150px');
+            container.block(
+            {
+                message: '<h4>Loading...</h4>',
+                css: 
+                {
+                    border: 'none', 
+                    padding: '15px', 
+                    backgroundColor: '#000', 
+                    '-webkit-border-radius': '10px', 
+                    '-moz-border-radius': '10px', 
+                    opacity: .5, 
+                    color: '#fff' 
+                } 
+            });
+            jQuery.post("/course/getSubscriptions", {}, function (subsc_data)
+            {
+                var row_toggle = 0;
+                for (var i in subsc_data.subsc_list)
+                {
+                    var html = '<li style="margin: 0 0 3px 4px;" class="r' + row_toggle;
+                    html += '" course_id="gcr_subsc_' + subsc_data.subsc_list[i].institution_short_name + '_' + subsc_data.subsc_list[i].id + '">';
+                        html += '<a target="_blank" href="' + subsc_data.subsc_list[i].link_href + '">';
+                            html += '<img class="gc_small_course_icon" src="' + subsc_data.subsc_list[i].icon + '" />';
+                            html += subsc_data.subsc_list[i].full_name;
+                        html += '</a>';
+                    html += '</li>';            
+                    jQuery('.gc_block_mysubscriptions_list').append(html);
+                    row_toggle = (row_toggle == 0) ? 1 : 0;
+                }
+                container.unblock();
+                container.css('min-height', '0px');   
+            }, "json");
+        }
+    };
+	
     jQuery(document).ready(function() 
     {
         gc_mycourses_block.getCourses();
+        //gc_mysubscriptions_block.getSubscriptions();
         jQuery('#gc_block_mycourses_get_more').click(function ()
         {
             gc_mycourses_block.getCourses();
@@ -121,6 +165,8 @@
     
     </script> 
 {/literal}
+
+
 <div id="courselistcontainer">
     <ul class="gc_block_mycourses_list"></ul>
 </div>
