@@ -111,7 +111,7 @@ class courseActions extends sfActions
 		$this->ind_products_list = $ind_products_list;
 		$this->products_list_institution = $products_list_institution;
 		$this->ind_products_details = $ind_products_details;
-        $this->getResponse()->setTitle('Courses');
+        $this->getResponse()->setTitle('Single Courses');
         sfConfig::set('sf_escaping_strategy', false);		
     }
 	
@@ -249,7 +249,7 @@ class courseActions extends sfActions
 		$this->libraries_list = $products_list;
 		$this->products_list_institution = $products_list_institution;
 		$this->products_details = $products_details;
-        $this->getResponse()->setTitle('Subscriptions');
+        $this->getResponse()->setTitle('Course Libraries');
         sfConfig::set('sf_escaping_strategy', false);
     }	
 	

@@ -300,7 +300,7 @@ if ($measure_time == 1) {
 ?>
 
 <div id="gc_course_list">
-	<div class="content_spacer_20px"><h1>Subscriptions</h1></div>
+	<div class="content_spacer_20px"><h1>My Course Libraries</h1></div>
 	<p>Global Classroom's subscription libraries provide members with unlimited access to courses that are 
 	focused on the job-relevant skills required to succeed in today's global economy. All courses completed 
 	recognize the member with a Certificate or a Badge of Participation that can be shared with your colleagues 
@@ -319,7 +319,7 @@ if ($measure_time == 1) {
 		
 <!-- blockcheck 1 -->		
 		<div>
-			<div class="content_spacer_20px"><h2>My Membership</h2></div>
+			<div class="content_spacer_20px"><h2>My Free and Paid Libraries</h2></div>
 			<div class="row">
 				<?php
 				$loop_i = 1;

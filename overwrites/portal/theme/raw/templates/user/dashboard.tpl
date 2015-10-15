@@ -47,16 +47,12 @@
 					}, "json");
 				}
 			};
-
-			jQuery(document).ready(function() 
-			{
-				gc_mysubscriptions_block.getSubscriptions();
-			});
 			</script> 
 			
+			{if $SUBSCRIPTIONS_EXIST}
 			<div class="blockinstance cb bt-mycoumysubscriptions" id="blockinstance_subsc">
 				<div class="blockinstance-header">
-					<h2 class="title">Course Listings <span style="font-size: 13px;">(click on individual libraries for more details)</span></h2>
+					<h2 class="title">My Course Libraries <span style="font-size: 13px;">(Click on the individual libraries to access the courses)</span><span style="font-size: 13px;align:right;text-align:right;float:right;"><a href="{$app->getUrl()}/course/subscriptions">+ View All Libraries</a></span></h2>
 					<span class="cb"></span>
 				</div>
 				<div class="blockinstance-content">
@@ -65,7 +61,14 @@
 						</ul>
 					</div>
 				</div>
-			</div>			
+			</div>
+			<script type="text/javascript">
+			jQuery(document).ready(function() 
+			{
+				gc_mysubscriptions_block.getSubscriptions();
+			});
+			</script> 			
+			{/if}			
 		
             {$viewcontent|safe}
             <div class="cb"></div>

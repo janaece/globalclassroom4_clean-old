@@ -221,7 +221,7 @@ print_r($ind_ctlg_crse_count);
 <section id="content">
 <div id="gc_course_list">
 
-<div class="content_spacer_20px"><h1>Individual Courses</h1></div>
+<div class="content_spacer_20px"><h1>Single Courses</h1></div>
 <div>
 <?php if ($network_id_val == 5 ) { ?>
 <p>Choose from among courses especially designed and/or chosen for you by your organization.</p>	

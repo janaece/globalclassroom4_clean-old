@@ -5,10 +5,10 @@
 {foreach from=$MAINNAV item=item}
 	{if $item.url == 'artefact/courses'}
 		{if $SUBSCRIPTIONS_EXIST}
-			<li><span><a href="{$app->getUrl()}/course/subscriptions" accesskey="s" class="">All Courses</a></span></li>
+			<li><span><a href="{$app->getUrl()}/course/subscriptions" accesskey="s" class="">Course Libraries</a></span></li>
 		{/if}
 		{if $COURSES_EXIST}
-			<li><span><a href="{$app->getUrl()}/course/view" accesskey="s" class="">Individual Courses</a></span></li>
+			<li><span><a href="{$app->getUrl()}/course/view" accesskey="s" class="">Single Courses</a></span></li>
 		{/if}			
 		{if $CERTIFICATIONS_EXIST}
 			<li><span><a href="{$app->getUrl()}/course/certifications" accesskey="s" class="">Certifications</a></span></li>
