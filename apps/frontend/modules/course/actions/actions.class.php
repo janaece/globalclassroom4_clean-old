@@ -383,7 +383,14 @@ class courseActions extends sfActions
 		$products_details = array();
  		foreach($products as $product) {
 			$mhr_usr_institution = $current_user->checkMhrUsrInstitutionRecord($product->getInstitutionShortName());
-			if($product->getCost() == 0 || $mhr_usr_institution) {
+			
+			$catalog_courses_count = 0;
+			$ctlg_crse_data = GcrInstitutionCatalogCoursesTable::getSubscriptionCoursesIns($this->current_app_short_name, $product->getInstitutionShortName());
+			foreach($ctlg_crse_data as $ctlg_crse) {
+				$catalog_courses_count = $catalog_courses_count + $ctlg_crse["p_courses_count"];
+			}
+			
+			if($catalog_courses_count > 0 && ($product->getCost() == 0 || $mhr_usr_institution)) {
 				$products_list[$product->getShortName()] = $product->getFullName();
 				$products_details[$product->getShortName()]["id"] = $product->getId();
 				$products_details[$product->getShortName()]["short_name"] = $product->getShortName();
