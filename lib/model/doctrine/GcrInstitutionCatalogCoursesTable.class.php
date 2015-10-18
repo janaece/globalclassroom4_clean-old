@@ -77,6 +77,19 @@ class GcrInstitutionCatalogCoursesTable extends Doctrine_Table
 		return($result);		
 	}
 	
+	public static function getSubscriptionCoursesIns($platform_short_name, $institution_short_name) {
+		$q = Doctrine_Query::create()
+		  ->select('p.*')
+		  ->from('GcrInstitutionCatalogCourses p')
+		  ->where('p.product_type_id = ?', 1)
+		  ->andWhere('p.platform_short_name = ?', $platform_short_name)
+		  ->andWhere('p.institution_short_name = ?', $institution_short_name)
+		  ->orderBy('p.id ASC');
+		$result = $q->execute(array(), Doctrine::HYDRATE_SCALAR);
+		//print_r($result);
+		return($result);		
+	}	
+	
 	public static function getIndividualCourses($platform_short_name) {
 		$q = Doctrine_Query::create()
 		  ->select('p.*')
