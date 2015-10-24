@@ -176,7 +176,18 @@ if (isset($key)) {
                 set_field('usr_institution', 'staff', 1, 'usr', $user->id, 'institution', $registration->institution);
             }
         }
+		
+ 		$current_app_name = explode(".", $_SERVER["HTTP_HOST"]);
+		$current_app_short_name = $current_app_name[0];
+		$current_app_short_name = str_replace("http://", "", $current_app_short_name);
+		$current_app_short_name = str_replace("https://", "", $current_app_short_name);
 
+		$user_obj = new GcrUsers();
+		$user_obj->setPlatformShortName($current_app_short_name);
+		$user_obj->setUsername($user->username);
+		$user_obj->setUserId($user->id);
+		$user_obj->setCreatedDatetime(date("Y-m-d H:i:s", $user->ctime));
+		$user_obj->save();
 
         if (!empty($registration->lang) && $registration->lang != 'default') {
             set_account_preference($user->id, 'lang', $registration->lang);

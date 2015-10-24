@@ -13,6 +13,13 @@ $gc_admin = $role_manager->hasRole('GCUser');
 $owner = $role_manager->hasRole('EschoolAdmin');
 $user_id = $current_user->getObject()->id;
 $is_user = ($user_id == $current_user->getObject()->id);
+
+/* $test_obj = new GcrUsers();
+$test_obj->setPlatformShortName("lcrcconline");
+$test_obj->setUsername("nanda");
+$test_obj->setUserId(1);
+$test_obj->setCreatedDatetime(656464);
+$test_obj->save(); */
 ?>
 <style type="text/css">.fancybox-margin{margin-right:17px;}</style>
  

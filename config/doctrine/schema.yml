@@ -1803,4 +1803,42 @@ GcrInstitutionCatalogCourses:
       unsigned: false
       notnull: true
       default: '0'
+      primary: false
+GcrUsers:
+  connection: doctrine
+  tableName: gcr_users
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: gcr_users_id
+    platform_short_name:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
+      primary: false	  
+    username:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
+      primary: false
+    user_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
+      primary: false
+    created_datetime:
+      type: timestamp()
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
       primary: false	  

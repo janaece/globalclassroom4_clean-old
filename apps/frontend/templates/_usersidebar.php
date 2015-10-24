@@ -1,4 +1,5 @@
 <?php
+
   global $USER;
   $app = gcr::getApp();
 

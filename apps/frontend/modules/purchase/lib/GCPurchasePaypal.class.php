@@ -60,7 +60,7 @@ class GCPurchasePaypal extends GCPurchase
         // Do payment
         $result = $this->cc->chargeDirect($isRecurring);
         $this->error_string = $this->cc->getErrorString();
-//echo $this->error_string;        
+//echo $this->error_string;
         if ($this->error_string)
         {
             $result_name = ($result) ? 'warning' : 'error';
