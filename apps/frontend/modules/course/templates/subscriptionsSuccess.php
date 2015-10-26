@@ -14,12 +14,7 @@ $owner = $role_manager->hasRole('EschoolAdmin');
 $user_id = $current_user->getObject()->id;
 $is_user = ($user_id == $current_user->getObject()->id);
 
-/* $test_obj = new GcrUsers();
-$test_obj->setPlatformShortName("lcrcconline");
-$test_obj->setUsername("nanda");
-$test_obj->setUserId(1);
-$test_obj->setCreatedDatetime(656464);
-$test_obj->save(); */
+$images_base_url = gcr::imagesBaseUrl;
 ?>
 <style type="text/css">.fancybox-margin{margin-right:17px;}</style>
  
@@ -195,7 +190,7 @@ $(document).ready(function() {
 
 <div id="page_loading_div">
 Loading...
-<img height="60" width="100" class="img-responsive" src="<?php echo $CFG->current_app->getAppUrl() . 'theme/globalclassroom/static/images/m1fR7ef.gif'; ?>"/>
+<img height="60" width="100" class="img-responsive" src="<?php echo $images_base_url . 'm1fR7ef.gif'; ?>"/>
 </div>
 
 <div id="page_content_load" style="display:none;">
@@ -342,8 +337,9 @@ if ($measure_time == 1) {
 								<a data-toggle="collapse" data-parent="#accordion" href="#collapseOneCS_<?php echo $products_detail_val["institution_short_name"]."_".$products_detail_val["id"]; ?>" aria-expanded="false" class="collapsed overview-title">
 									<?php
 									$image_url = "";
-									if(!empty($products_detail_val["icon"]) && file_exists("./portal/theme/globalclassroom/static/images/" .$products_detail_val["icon"])) {
-										$image_url = $CFG->current_app->getAppUrl() . "theme/globalclassroom/static/images/" .$products_detail_val["icon"];
+									//if(!empty($products_detail_val["icon"]) && @getimagesize($images_base_url . $products_detail_val["icon"])) {
+									if(!empty($products_detail_val["icon"])) {
+										$image_url = $images_base_url .$products_detail_val["icon"];
 									?>
 									<img src="<?php print $image_url; ?>" alt="<?php echo $products_detail_val["full_name"]; ?>" height="30" width="30">
 									<?php } ?>
@@ -398,8 +394,9 @@ if ($measure_time == 1) {
 										<a data-toggle="collapse" data-parent="#accordion" href="#collapseOneCS_<?php echo $products_detail_val["institution_short_name"]."_".$products_detail_val["id"]; ?>" aria-expanded="false" class="collapsed overview-title">
 											<?php
 											$image_url = "";
-											if(!empty($products_detail_val["icon"]) && file_exists("./portal/theme/globalclassroom/static/images/" .$products_detail_val["icon"])) {
-												$image_url = $CFG->current_app->getAppUrl() . "theme/globalclassroom/static/images/" .$products_detail_val["icon"];
+											//if(!empty($products_detail_val["icon"]) && @getimagesize($images_base_url . $products_detail_val["icon"])) {
+											if(!empty($products_detail_val["icon"])) {
+												$image_url = $images_base_url . $products_detail_val["icon"];
 											?>
 											<img src="<?php print $image_url; ?>" alt="<?php echo $products_detail_val["full_name"]; ?>" height="30" width="30">
 											<?php } ?>
@@ -451,8 +448,9 @@ if ($measure_time == 1) {
 							<a class="" href="#collapseOneCS_<?php echo $products_detail_val["institution_short_name"]."_".$products_detail_val["id"]; ?>">
 								<?php
 								$image_url = "";
-								if(!empty($products_detail_val["icon"]) && file_exists("./portal/theme/globalclassroom/static/images/" .$products_detail_val["icon"])) {
-									$image_url = $CFG->current_app->getAppUrl() . "theme/globalclassroom/static/images/" .$products_detail_val["icon"];
+								//if(!empty($products_detail_val["icon"]) && @getimagesize($images_base_url . $products_detail_val["icon"])) {
+								if(!empty($products_detail_val["icon"])) {
+									$image_url = $images_base_url . $products_detail_val["icon"];
 								?>
 								<img src="<?php print $image_url; ?>" alt="<?php echo $products_detail_val["full_name"]; ?>">
 								<?php } ?>
@@ -505,11 +503,11 @@ if ($measure_time == 1) {
 						<?php if ($button_flag == 0) { ?>
 						<?php
 								$image_url = "";
-								if(file_exists("./portal/theme/globalclassroom/static/images/checkmark.png")) {
-										$image_url = $CFG->current_app->getAppUrl() . "theme/globalclassroom/static/images/checkmark.png" ;
+								//if(@getimagesize($images_base_url . "checkmark.png")) {
+										$image_url = $images_base_url . "checkmark.png" ;
 									?>
 									<img src="<?php print $image_url; ?>" height="80" width="80" style="margin-top:-10px;margin-left:5px;">
-								<?php } ?>
+								<?php //} ?>
 						<?php } ?>						
 					</div>
 					<?php //} ?>

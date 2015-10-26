@@ -4,6 +4,10 @@ global $CFG;
 $current_user = $CFG->current_app->getCurrentUser();
 $enrol_count = count($current_user->getEnrolments());
 $course_creator = $CFG->current_app->hasPrivilege('EclassroomUser');
+
+$images_base_url = gcr::imagesBaseUrl;
+
+
 ?>
 <style type="text/css">.fancybox-margin{margin-right:17px;}</style>
  
@@ -148,7 +152,7 @@ $(document).ready(function() {
 
 <div id="page_loading_div">
 Loading...
-<img height="60" width="100" class="img-responsive" src="<?php echo $CFG->current_app->getAppUrl() . 'theme/globalclassroom/static/images/m1fR7ef.gif'; ?>"/>
+<img height="60" width="100" class="img-responsive" src="<?php echo $images_base_url . 'm1fR7ef.gif'; ?>"/>
 </div>
 
 <div id="page_content_load" style="display:none;">
@@ -243,7 +247,7 @@ foreach($ind_products_details as $ind_products_detail_key=>$ind_products_detail_
 	?>
 		<div class="col-md-4">
 			<a data-toggle="collapse" data-parent="#accordion1" href="#collapseOneCS<?php echo $ind_products_detail_val["id"]; ?>" class="overview-title">
-				<img src="<?php print $CFG->current_app->getAppUrl(); ?>theme/globalclassroom/static/images/<?php echo $ind_products_detail_val["icon"]; ?>" alt="<?php echo $ind_products_detail_val["full_name"]; ?>" height="30" width="30">&nbsp;&nbsp;<strong><?php echo $ind_products_detail_val["full_name"]; ?></strong>
+				<img src="<?php print $images_base_url . $ind_products_detail_val["icon"]; ?>" alt="<?php echo $ind_products_detail_val["full_name"]; ?>" height="30" width="30">&nbsp;&nbsp;<strong><?php echo $ind_products_detail_val["full_name"]; ?></strong>
 			</a>: 
 			&nbsp;-&nbsp;
 			<?php
@@ -281,7 +285,7 @@ foreach($ind_products_details as $products_detail_key=>$products_detail_val) {
 					<div class="col-md-6">
 					<p>
 					<a class="" href="#<?php echo $products_detail_val["short_name"] ?>">
-					<img src="<?php print $CFG->current_app->getAppUrl(); ?>theme/globalclassroom/static/images/<?php echo $products_detail_val["icon"]; ?>" alt="<?php echo $products_detail_val["full_name"]; ?>" /></a>
+					<img src="<?php print $images_base_url . $products_detail_val["icon"]; ?>" alt="<?php echo $products_detail_val["full_name"]; ?>" /></a>
 					<a class="view_details" data-toggle="collapse" data-parent="#accordion1" href="#collapseOneCS<?php echo $products_detail_val["id"]; ?>" >
 					<span style="font-size: 16px; font-weight: bold; color:"><?php echo $products_detail_val["full_name"]; ?> </span>
 					</a><!-- : <?php echo $products_detail_val["pricing_html"]; ?>--> </p>

@@ -542,6 +542,18 @@ function uploadcsv_submit(Pieform $form, $values) {
             $user->passwordchange = (int)$values['forcepasswordchange'];
 
             $user->id = create_user($user, $profilefields, $institution, $authrecord, $remoteuser, $values, true);
+			
+			$current_app_name = explode(".", $_SERVER["HTTP_HOST"]);
+			$current_app_short_name = $current_app_name[0];
+			$current_app_short_name = str_replace("http://", "", $current_app_short_name);
+			$current_app_short_name = str_replace("https://", "", $current_app_short_name);	
+
+			$user_obj = new GcrUsers();
+			$user_obj->setPlatformShortName($current_app_short_name);
+			$user_obj->setUsername($user->username);
+			$user_obj->setUserId($user->id);
+			$user_obj->setCreatedDatetime(date("Y-m-d H:i:s"));
+			$user_obj->save();
 
             $addedusers[] = $user;
             log_debug('added user ' . $user->username);
