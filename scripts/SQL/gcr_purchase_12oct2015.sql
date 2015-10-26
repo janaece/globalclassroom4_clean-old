@@ -1,0 +1,1 @@
+﻿alter table gcr_purchase add product_type_id int, product_short_name character varying(100)
