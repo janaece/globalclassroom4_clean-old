@@ -68,6 +68,8 @@ class gcr
     const CC_PASS = 'globalclassroom0509';
     const CC_APIKEY = '5c5afc13-e5d3-4ed4-b582-6f441d9aa9ed';
     const CC_LIST = 'eSchool Newsletter';
+// Products Images URL
+	const imagesBaseUrl = 'https://lcrcconline.globalclassroom.us/portal/theme/globalclassroom/static/images/';
 
     // S3
     const AWS_URL_EXPIRE_LINK = '5 minutes'; //URL expiration in seconds; modification not recommended
