@@ -15,6 +15,7 @@ $user_id = $current_user->getObject()->id;
 $is_user = ($user_id == $current_user->getObject()->id);
 
 $images_base_url = gcr::imagesBaseUrl;
+$images_subfolder ='http://gc-elearning-portal-static-image-hosting.globalclassroom.us.s3.amazonaws.com/stratusimages/';
 ?>
 <style type="text/css">.fancybox-margin{margin-right:17px;}</style>
  
@@ -190,7 +191,7 @@ $(document).ready(function() {
 
 <div id="page_loading_div">
 Loading...
-<img height="60" width="100" class="img-responsive" src="<?php echo $images_base_url . 'm1fR7ef.gif'; ?>"/>
+<img height="60" width="100" class="img-responsive" src="<?php echo $images_subfolder . 'loading.gif'; ?>"/>
 </div>
 
 <div id="page_content_load" style="display:none;">
@@ -504,7 +505,7 @@ if ($measure_time == 1) {
 						<?php
 								$image_url = "";
 								//if(@getimagesize($images_base_url . "checkmark.png")) {
-										$image_url = $images_base_url . "checkmark.png" ;
+										$image_url = $images_subfolder . "checkmark.png" ;
 									?>
 									<img src="<?php print $image_url; ?>" height="80" width="80" style="margin-top:-10px;margin-left:5px;">
 								<?php //} ?>
