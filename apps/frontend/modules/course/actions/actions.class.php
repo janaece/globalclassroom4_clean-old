@@ -381,6 +381,7 @@ class courseActions extends sfActions
 		$course_list_array = array();
 		$products = GcrProductsTable::getProductLibraries($this->current_app_short_name);
 		$products_details = array();
+		$images_base_url = gcr::imagesBaseUrl;
  		foreach($products as $product) {
 			$mhr_usr_institution = $current_user->checkMhrUsrInstitutionRecord($product->getInstitutionShortName());
 			
@@ -396,7 +397,7 @@ class courseActions extends sfActions
 				$products_details[$product->getShortName()]["short_name"] = $product->getShortName();
 				$products_details[$product->getShortName()]["full_name"] = $product->getFullName();
 				$products_details[$product->getShortName()]["institution_short_name"] = $product->getInstitutionShortName();
-				$products_details[$product->getShortName()]["icon"] = $CFG->current_app->getAppUrl() . "theme/globalclassroom/static/images/" . $product->getIcon();
+				$products_details[$product->getShortName()]["icon"] = $images_base_url . $product->getIcon();
 				$products_details[$product->getShortName()]["link_href"] = str_replace("/portal", "", $CFG->current_app->getAppUrl()) . "course/subscriptions/#" . $product->getInstitutionShortName()."_".$product->getId();
 			}		
 		}
@@ -419,6 +420,8 @@ class courseActions extends sfActions
         $course_collection = $course->getCourseCollection();
         $course_instances = array();
         $courses = array($course);
+		
+		
         if ($course_collection)
         {
             if (!$course->isRepresentative())
@@ -464,9 +467,9 @@ class courseActions extends sfActions
         $return_array['summary'] = $summary;
         $return_array['summary_edit_url'] = $summary_edit_url;
         $return_array['course_fullname'] = $course_obj->fullname;
-        
         $return_array['rep_course_id'] = $course->getObject()->id;
         $return_array['category_id'] = $course_obj->category;
+        $return_array['product_short_name'] = $product_short_name;
         
         $this->getResponse()->setHttpHeader('Content-type', 'application/json');
         return $this->renderText(json_encode($return_array));
