@@ -26,36 +26,27 @@ Doctrine_Manager::getInstance()->bindComponent('GcrUsers', 'doctrine');
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-abstract class BaseGcrUsers extends sfDoctrineRecord
+abstract class BaseGcrCourseEnrolments extends sfDoctrineRecord
 {
     public function setTableDefinition()
     {
-        $this->setTableName('gcr_users');
+        $this->setTableName('gcr_course_enrolments');
         $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
              'fixed' => false,
              'unsigned' => false,
              'primary' => true,
-             'sequence' => 'gcr_users_id',
+             'sequence' => 'gcr_course_enrolments_id',
              'length' => 8,
              ));
-        $this->hasColumn('platform_short_name', 'string', null, array(
-             'type' => 'string',
+        $this->hasColumn('course_id', 'integer', 8, array(
+             'type' => 'integer',
              'fixed' => false,
              'unsigned' => false,
              'notnull' => true,
              'default' => '',
              'primary' => false,
-             'length' => '',
-             ));			 
-        $this->hasColumn('username', 'string', null, array(
-             'type' => 'string',
-             'fixed' => false,
-             'unsigned' => false,
-             'notnull' => true,
-             'default' => '',
-             'primary' => false,
-             'length' => '',
+             'length' => 8,
              ));
         $this->hasColumn('user_id', 'integer', 8, array(
              'type' => 'integer',
@@ -65,27 +56,9 @@ abstract class BaseGcrUsers extends sfDoctrineRecord
              'default' => '',
              'primary' => false,
              'length' => 8,
-             ));
-        $this->hasColumn('state', 'string', null, array(
-             'type' => 'string',
-             'fixed' => false,
-             'unsigned' => false,
-             'notnull' => false,
-             'default' => '',
-             'primary' => false,
-             'length' => '',
-             ));
-        $this->hasColumn('country', 'string', null, array(
-             'type' => 'string',
-             'fixed' => false,
-             'unsigned' => false,
-             'notnull' => false,
-             'default' => '',
-             'primary' => false,
-             'length' => '',
              ));			 
-        $this->hasColumn('created_datetime', 'timestamp', null, array(
-             'type' => 'timestamp',
+        $this->hasColumn('platform_short_name', 'string', null, array(
+             'type' => 'string',
              'fixed' => false,
              'unsigned' => false,
              'notnull' => true,
@@ -93,6 +66,42 @@ abstract class BaseGcrUsers extends sfDoctrineRecord
              'primary' => false,
              'length' => '',
              ));
+        $this->hasColumn('product_short_name', 'string', null, array(
+             'type' => 'string',
+             'fixed' => false,
+             'unsigned' => false,
+             'notnull' => true,
+             'default' => '',
+             'primary' => false,
+             'length' => '',
+             ));
+        $this->hasColumn('catalog_short_name', 'string', null, array(
+             'type' => 'string',
+             'fixed' => false,
+             'unsigned' => false,
+             'notnull' => true,
+             'default' => '',
+             'primary' => false,
+             'length' => '',
+             ));			 
+        $this->hasColumn('course_name', 'string', null, array(
+             'type' => 'string',
+             'fixed' => false,
+             'unsigned' => false,
+             'notnull' => true,
+             'default' => '',
+             'primary' => false,
+             'length' => '',
+             ));
+        $this->hasColumn('enrolled_date', 'integer', 8, array(
+             'type' => 'integer',
+             'fixed' => false,
+             'unsigned' => false,
+             'notnull' => true,
+             'default' => '',
+             'primary' => false,
+             'length' => 8,
+             ));			 
     }
 
     public function setUp()

@@ -8,6 +8,7 @@ $course_creator = $CFG->current_app->hasPrivilege('EclassroomUser');
 $images_base_url = gcr::imagesBaseUrl;
 $images_subfolder ='http://gc-elearning-portal-static-image-hosting.globalclassroom.us.s3.amazonaws.com/stratusimages/';
 
+
 ?>
 <style type="text/css">.fancybox-margin{margin-right:17px;}</style>
  
@@ -427,7 +428,10 @@ foreach($ind_products_details as $products_detail_key=>$products_detail_val) {
 												</span>
 												<span class="gc_course_list_item_cost">
 													<?php print $cost_text; ?>
-												</span> 
+												</span>
+												<span class="gc_course_list_product_id">
+													<?php print $products_detail_val["id"]; ?>
+												</span>												
 											</div>
 										</div>
 									</div>			

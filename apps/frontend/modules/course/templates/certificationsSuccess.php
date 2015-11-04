@@ -417,7 +417,10 @@ foreach($cert_products_details as $products_detail_key=>$products_detail_val) {
 												</span>
 												<span class="gc_course_list_item_cost">
 													<?php print $cost_text; ?>
-												</span> 
+												</span>
+												<span class="gc_course_list_product_id">
+													<?php print $products_detail_val["id"]; ?>
+												</span>												
 											</div>
 										</div>
 									</div>			

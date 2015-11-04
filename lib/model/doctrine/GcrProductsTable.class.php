@@ -133,6 +133,26 @@ class GcrProductsTable extends Doctrine_Table
 			return $products;
         }				
         return false;
+    }
+	
+	/**
+	* This function gets product details
+	*
+	* @param product id $product_id
+	*/	
+    public static function getProductDetailsById($product_id)
+    {
+        $products = Doctrine::getTable('GcrProducts')
+                ->createQuery('p')
+                ->where('p.status = ?', 1)
+				->andWhere('p.id = ?', $product_id)
+				->orderBy('p.id ASC')
+                ->execute();
+        if (count($products) > 0)
+        {
+			return $products;
+        }				
+        return false;
     }	
 	
 	/**

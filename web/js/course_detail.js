@@ -188,7 +188,7 @@ var $gc_course_detail =
             var html = '<br /><br /><h3 style="margin:10px">Loading course...</h3>';
             jQuery.colorbox({html: html, fixed: true});
             document.location.href = gcrGetAppUrl(gc_course_detail.eschool_id, true) + 
-                '/course/view.php?id=' + gc_course_detail.selected_course_id + '&transfer=' + gc_current_app_id;
+                '/course/view.php?id=' + gc_course_detail.selected_course_id + '&transfer=' + gc_current_app_id + "&product=" + gc_course_detail.course_data.product_short_name;
         });
         jQuery("#course_instance_edit_settings_button").click(function() 
         {

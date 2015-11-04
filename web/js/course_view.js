@@ -71,11 +71,12 @@ var $gc_course_viewer =
     {
         var course_item_id = list_item.attr('id');
         var course_icon_src = list_item.find('.gc_course_list_item_icon img').attr('src');
+        var course_product_id = list_item.find('.gc_course_list_product_id').html();
         course_item_id = course_item_id.split("_");
         var eschool_id = course_item_id[2];
         var course_id = course_item_id[3];
         var paid_flag = course_item_id[4];
-        jQuery.post("/course/getHTMLCourseSummary", {eschool_id: eschool_id, course_id: course_id}, function (course_data)
+        jQuery.post("/course/getHTMLCourseSummary", {eschool_id: eschool_id, course_id: course_id, course_product_id: course_product_id}, function (course_data)
         {
             $gc_course_detail.course_id = course_id;
             $gc_course_detail.eschool_id = eschool_id;

@@ -1835,10 +1835,83 @@ GcrUsers:
       notnull: true
       default: ''
       primary: false
+    state:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: ''
+      primary: false
+    country:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: ''
+      primary: false	  
     created_datetime:
       type: timestamp()
       fixed: false
       unsigned: false
       notnull: true
       default: ''
+      primary: false
+GcrCourseEnrolments:
+  connection: doctrine
+  tableName: gcr_course_enrolments
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: gcr_course_enrolments_id
+    user_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
+      primary: false
+    course_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
+      primary: false
+    platform_short_name:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
+      primary: false
+    product_short_name:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
+      primary: false
+    catalog_short_name:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
       primary: false	  
+    course_name:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: ''
+      primary: false
+    enrolled_date:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      default: ''
+      primary: false

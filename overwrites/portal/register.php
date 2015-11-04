@@ -194,7 +194,7 @@ if (isset($key)) {
         }
 
         // Delete the old registration record
-        delete_records('usr_registration', 'id', $registrationid);
+        //delete_records('usr_registration', 'id', $registrationid);
 
         db_commit();
 

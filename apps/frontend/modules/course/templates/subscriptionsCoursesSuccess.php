@@ -90,6 +90,9 @@ foreach($ctlg_courses_list as $course_list) {
 							<span class="gc_course_list_item_cost">
 								<?php print $cost_text; ?>
 							</span> 
+							<span class="gc_course_list_product_id">
+								<?php print $product_id; ?>
+							</span>
 						</div>
 					</div>
 				</div>			

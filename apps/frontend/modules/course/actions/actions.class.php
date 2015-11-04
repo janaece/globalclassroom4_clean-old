@@ -421,6 +421,12 @@ class courseActions extends sfActions
         $course_instances = array();
         $courses = array($course);
 		
+		$product_short_name = "";
+		$course_product_id = $request->getParameter('course_product_id');
+		$product_details = GcrProductsTable::getProductDetailsById($course_product_id);
+		foreach($product_details as $product) {
+			$product_short_name = $product->getShortName();				
+		}
 		
         if ($course_collection)
         {

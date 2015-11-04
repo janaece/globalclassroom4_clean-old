@@ -2824,7 +2824,7 @@ function get_login_url() {
  * @throws coding_exception
  * @throws require_login_exception
  */
-function require_login($courseorid = null, $autologinguest = true, $cm = null, $setwantsurltome = true, $preventredirect = false) {
+function require_login($courseorid = null, $autologinguest = true, $cm = null, $setwantsurltome = true, $preventredirect = false, $product_short_name = null) {
     global $CFG, $SESSION, $USER, $PAGE, $SITE, $DB, $OUTPUT;
 
     // Must not redirect when byteserving already started.
@@ -3134,7 +3134,7 @@ function require_login($courseorid = null, $autologinguest = true, $cm = null, $
             if ($setwantsurltome) {
                 $SESSION->wantsurl = qualified_me();
             }
-            redirect($CFG->wwwroot .'/enrol/index.php?id='. $course->id);
+            redirect($CFG->wwwroot .'/enrol/index.php?id='. $course->id . "&product=" . $product_short_name);
         }
     }
 
